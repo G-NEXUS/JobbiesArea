@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Units and Measurements</title>
+    
+    <style>
+        /* Define color variables for consistency */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 340px) {
+            .container-notes {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+        }
+
+        @media(min-width:340px) {
+            header .description {
+                font-size: 0.25 rem;
+            }
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        
+        
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-style-none > li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        .list-style-none > li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-700);
+            font-weight: bold;
+        }
+        
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            min-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        thead {
+            background-color: var(--color-slate-100);
+            border-bottom: 1px solid var(--color-slate-200);
+        }
+
+        th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 600px) {
+            th {
+                font-size: 0.65rem;
+                padding: 0.25rem 1rem
+            }
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-bottom: 1px solid var(--color-slate-200);
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem/Box Styles */
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        .step-list {
+            counter-reset: step-counter;
+        }
+        
+        /* Math Blocks */
+        .math-display, .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: var(--color-blue-800);
+            background-color: var(--color-blue-50);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .math-block {
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+        }
+
+        .zen{
+            background-color: var(--color-blue-600);
+            padding: 8px 24px;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .zen:hover {
+            background-color: var(--color-blue-700);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body, .container-notes, .toc-nav {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            .toc-nav {
+                padding: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .toc-list {
+                gap: 0.125rem 0.5rem !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Step list responsive */
+        @media (max-width: 480px) {
+            .step-list {
+                padding-left: 0 !important;
+            }
+            
+            .step-list li {
+                margin-bottom: 0.75rem !important;
+                padding-left: 1.75rem !important;
+            }
+            
+            .step-list li::before {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Units and Measurements (PH 110)</h2>
+            <a class="navbar-back" href="physics.html">← Back to Physics</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">PH 110</p>
+                <h1>
+                    Units and Measurements
+                </h1>
+                <p class="description">
+                    Physics is the study of changes in the universe based on measurement. A measurement involves comparing a physical quantity (like length or time) to a standardized reference known as a <strong>unit</strong>. The result is a numerical <strong>magnitude</strong> which indicates how many times the unit fits into the quantity.
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p class="toc-title">Unite Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-types">1. Types of Quantities & Units</a></li>
+                    <li><a href="#section-si">2. The International System (SI)</a></li>
+                    <li><a href="#section-conversion">3. Unit Conversion & Standards</a></li>
+                    <li><a href="#section-dimensions">4. Dimensional Analysis</a></li>
+                    <li><a href="#section-sigfigs">5. Significant Figures & Rounding</a></li>
+                    <li><a href="#section-errors">6. Errors in Measurement & Propagation</a></li>
+                    <li><a href="#section-density">7. Density & Atomic Mass</a></li>
+                    <li><a href="#section-magnitude">8. Order of Magnitude</a></li>
+                </ul>
+            </nav>
+
+            <section id="section-types" class="mb-12">
+                <h2>1. Types of Quantities & Units</h2>
+
+                <h3>1.1 Fundamental Quantities</h3>
+                <p>A <strong>fundamental quantity</strong> is a physical quantity that is considered independent of all other quantities. It cannot be defined using any other physical quantity. Its unit is called a <strong>fundamental unit</strong>.</p>
+                <p>For example, you cannot define mass using only length and time. In the field of mechanics, the three core fundamental units are <strong>Length (m), Mass (kg), and Time (s)</strong>.</p>
+
+                <h3>1.2 Derived Quantities</h3>
+                <p>A <strong>derived quantity</strong> is any physical quantity that is formed by the mathematical combination (multiplication, division, etc.) of two or more fundamental quantities. Its unit is called a <strong>derived unit</strong>.</p>
+                <div class="solution-box">
+                    <p class="solution-title">Example: Velocity and Force</p>
+                    <ul class="simple-list">
+                        <li><strong>Velocity</strong>: Defined as distance (Length) / time. Unit: m/s.</li>
+                        <li><strong>Force</strong>: Defined as mass × acceleration (acceleration is length / time²). Unit: kg·m/s², which is specially named the <strong>Newton (N)</strong>.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <hr>
+
+            <section id="section-si" class="mb-12">
+                <h2>2. The International System (SI)</h2>
+                <p>The <strong>International System of Units (SI)</strong> This the globally accepted standerd </p>
+
+                <h3>2.1 The Seven Base Units</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Unit Name</th>
+                                <th>Symbol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Length</td><td>Meter</td><td>m</td></tr>
+                            <tr><td>Mass</td><td>Kilogram</td><td>kg</td></tr>
+                            <tr><td>Time</td><td>Second</td><td>s</td></tr>
+                            <tr><td>Electric Current</td><td>Ampere</td><td>A</td></tr>
+                            <tr><td>Temperature</td><td>Kelvin</td><td>K</td></tr>
+                            <tr><td>Amount of Substance</td><td>Mole</td><td>mol</td></tr>
+                            <tr><td>Luminous Intensity</td><td>Candela</td><td>cd</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>2.2 Prefixes for SI Units</h3>
+                <p>SI prefixes are powers of ten used to scale units, avoiding the need to write out long strings of zeros. For instance, instead of writing 0.001 meter, you write 1 millimeter (1mm).</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Prefix</th>
+                                <th>Symbol</th>
+                                <th>Factor</th>
+                                <th>Prefix</th>
+                                <th>Symbol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>10¹²</td><td>tera-</td><td>T</td><td>10⁻³</td><td>milli-</td><td>m</td></tr>
+                            <tr><td>10⁹</td><td>giga-</td><td>G</td><td>10⁻⁶</td><td>micro-</td><td>μ</td></tr>
+                            <tr><td>10⁶</td><td>mega-</td><td>M</td><td>10⁻⁹</td><td>nano-</td><td>n</td></tr>
+                            <tr><td>10³</td><td>kilo-</td><td>k</td><td>10⁻¹²</td><td>pico-</td><td>p</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <hr>
+
+            <section id="section-conversion" class="mb-12">
+                <h2>3. Unit Conversion & Standards</h2>
+                
+                <h3>3.1 The Chain-Link Conversion Method (Factor-Label Method)</h3>
+                <p>This method uses a <strong>conversion factor</strong> (a fraction equal to 1) to change the units of a quantity without changing its value. The unit you want to eliminate must be placed in the denominator of the conversion factor so it cancels algebraically.</p>
+                
+                <div class="solution-box">
+                    <p class="solution-title">Step-by-Step Example: Convert 25.0 meters per second (m/s) to kilometers per hour (km/h).</p>
+                    <ul class="step-list">
+                        <li><strong>Step 1</strong>: Convert meters (m) to kilometers (km). Use the factor (1km / 1000m).</li>
+                        <li><strong>Step 2</strong>: Convert seconds (s) to hours (h). We know 1h = 60min and 1min = 60s, so 1h = 3600s. Use the factor (3600s / 1h).</li>
+                        <li><strong>Step 3</strong>: Set up the calculation and cancel units:</li>
+                    </ul>
+                    <div class="math-block">
+                        25.0m/s × (1km / 1000m) × (3600s / 1h)
+                        <br>
+                        = (25.0 × 3600) / 1000 km/h
+                        <br>
+                        = 90 km/h
+                    </div>
+                </div>
+
+                <h3>3.2 Official Standards</h3>
+                <p>The definitions of the fundamental SI units are based on intrinsic properties (built-in charecteristics) of nature, guaranteeing they are invariant (do not change) and precise:</p>
+                <ul class="list-style-none">
+                    <li><strong>Meter (Length)</strong>: Defined via the constant speed of light.</li>
+                    <li><strong>Second (Time)</strong>: Defined via the fixed frequency of radiation emitted by a Cesium-133 atom.</li>
+                    <li><strong>Kilogram (Mass)</strong>: Defined via the fixed value of the Planck constant (h).</li>
+                </ul>
+            </section>
+            
+            <hr>
+
+            <section id="section-dimensions" class="mb-12">
+                <h2>4. Dimensional Analysis</h2>
+                <p>Dimensional analysis is a technique to check the consistency of equations and derive relationships between physical quantities using their fundamental dimensions: <strong>Mass [M], Length [L], and Time [T]</strong>.</p>
+
+                <h3>4.1 Principle of Homogeneity</h3>
+                <p>This principle is a core rule: <strong>all terms in a valid physical equation must have the exact same dimensions</strong>. This ensures that the calculation is meaningful (e.g., you cannot add a time to a length).</p>
+
+                <h4>Step-by-Step Example: Deriving a Formula</h4>
+                <div class="solution-box">
+                    <p class="solution-title">The time period (T) of an oscillating spring depends on mass (m) and spring constant (k). Find the formula form, assuming T = kᵃ mᵇ.</p>
+                    <p>Spring Constant (k) is defined by Force / displacement: [MLT⁻² / L] = [MT⁻²].</p>
+                    <ul class="step-list">
+                        <li><strong>Step 1:</strong> Write the dimensional equation by substituting dimensions:</li>
+                        <div class="math-block">
+                            [T] = [MT⁻²]ᵃ × [M]ᵇ = [Mᵃ⁺ᵇ T⁻²ᵃ]
+                        </div>
+                        <li><strong>Step 2:</strong> Equate the powers of M and T on both sides:</li>
+                        <div class="math-block">
+                            For M: 0 = a + b  (Equation 1)
+                            <br>
+                            For T: 1 = -2a    (Equation 2)
+                        </div>
+                        <li><strong>Step 3:</strong> Solve the system of equations:</li>
+                        <div class="math-block">
+                            From (2), a = -1/2
+                            <br>
+                            Substitute a into (1): 0 = (-1/2) + b  ⇒  b = 1/2
+                        </div>
+                        <li><strong>Step 4:</strong> Substitute the powers back into the original formula:</li>
+                        <div class="math-block">
+                            T = (k)⁻¹⁄² (m)¹⁄² = m¹⁄² / k¹⁄² 
+                            <br>
+                            T is proportional to the square root of (m/k).
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+            
+            <section id="section-sigfigs" class="mb-12">
+                <h2>5. Significant Figures & Rounding Off</h2>
+
+                <h3>5.1 Rules for Identifying Significant Figures (Sig Figs)</h3>
+                <p>Sig figs represent the certainty of a measurement. You count them from the first non-zero digit on the left.</p>
+                <ul class="list-style-none">
+                    <li><strong>Rule 1 (Non-zeros):</strong> Always significant (e.g., 123 has 3 sig figs).</li>
+                    <li><strong>Rule 2 (Sandwich Zeros):</strong> Zeros between non-zeros are significant (e.g., 102 has 3 sig figs).</li>
+                    <li><strong>Rule 3 (Leading Zeros):</strong> Zeros used as place holders are <strong>not</strong> significant including the first zero(e.g., 0.<u><strong>00</strong></u>78 has 2 sig figs).</li>
+                    <li><strong>Rule 4 (Trailing Zeros):</strong> Zeros on the right end are significant <strong>only if a decimal point is explicitly present</strong> (e.g., 400. has 3 sig figs while 400 has 1 sig fig).</li>
+                </ul>
+
+                <h3>5.2 Calculation Rules (Rounding Off)</h3>
+                <p>When calculating a result, you must round the final answer so its precision reflects the least precise input measurement.</p>
+                <ul class="step-list">
+                    <li><strong>Addition/Subtraction:</strong> The result must be rounded to have the same number of <strong>decimal places</strong> as the measurement with the <strong>fewest</strong> decimal places.</li>
+                    <li><strong>Multiplication/Division:</strong> The result must be rounded to have the same number of <strong>significant figures</strong> as the measurement with the <strong>fewest</strong> significant figures.</li>
+                </ul>
+            </section>
+            
+            <hr>
+
+            <section id="section-errors" class="mb-12">
+                <h2>6. Errors in Measurement & Propagation</h2>
+
+                <h3>6.1 Calculating Error Components</h3>
+                <p>A measured value A is reported as: <strong>(Mean Value) ± (Absolute Error)</strong>, or <srong>A ± ΔA.</srong></p>
+                <ul class="simple-list">
+                    <li><strong>Absolute Error (ΔA):</strong> The uncertainty or variation in a measurement, measured in the same units as A.</li>
+                    <li><strong>Relative (Fractional) Error:</strong> A dimensionless measure of precision, calculated as the ratio of absolute error to the mean value: ΔA / A.</li>
+                    <li><strong>Percent Error:</strong> The fractional error multiplied by 100%: (ΔA / A) × 100%.</li>
+                </ul>
+
+                <h3>6.2 Combination (Propagation) of Errors</h3>
+                <p>When multiple uncertain measurements (A, B) are combined mathematically to find a result X, their individual errors (ΔA, ΔB) propagate to determine the final error (ΔX).</p>
+
+                <h4>Formula Summary</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Error Formula</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sum or Difference</strong> <br> X = A + B or X = A - B</td>
+                                <td>ΔX = ± (ΔA + ΔB)</td>
+                                <td>The maximum <strong>absolute errors</strong> are <strong>added</strong> directly.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product or Quotient</strong> <br> X = A × B or X = A / B</td>
+                                <td>ΔX / X = ± (ΔA / A + ΔB / B)</td>
+                                <td>The maximum <strong>fractional (relative) errors</strong> are <strong>added</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Power</strong> <br> X = Aⁿ</td>
+                                <td>ΔX / X = ± |n|(ΔA / A)</td>
+                                <td>The fractional error is multiplied by the magnitude of the <strong>power (n)</strong>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Example 1: Addition/Subtraction (Absolute Error Addition)</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Calculate the total resistance R = R₁ + R₂.</p>
+                    <p>Given: R₁ = 10.5Ω ± 0.5Ω and R₂ = 5.2Ω ± 0.3Ω.</p>
+                    <ul class="step-list">
+                        <li><strong>Step 1:</strong> Calculate the mean value of R:</li>
+                        <div class="math-block">
+                            R = R₁ + R₂ = 10.5Ω + 5.2Ω = 15.7Ω
+                        </div>
+                        <li><strong>Step 2:</strong> Calculate the absolute error (ΔR) by adding the individual absolute errors:</li>
+                        <div class="math-block">
+                            ΔR = ΔR₁ + ΔR₂ = 0.5Ω + 0.3Ω = 0.8Ω
+                        </div>
+                        <li><strong>Result:</strong> The total resistance is <strong>15.7Ω ± 0.8Ω</strong>.</li>
+                    </ul>
+                </div>
+
+                <h4>Example 2: Multiplication/Division (Fractional Error Addition)</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Calculate the Density (ρ) = Mass / Volume.</p>
+                    <p>Given: Mass (M) = 20g ± 1g and Volume (V) = 5cm³ ± 0.1cm³.</p>
+                    <ul class="step-list">
+                        <li><strong>Step 1:</strong> Calculate the mean value of Density (ρ):</li>
+                        <div class="math-block">
+                            ρ = M / V = 20g / 5cm³ = 4 g/cm³
+                        </div>
+                        <li><strong>Step 2:</strong> Calculate the fractional error for each quantity:</li>
+                        <div class="math-block">
+                            ΔM / M = 1 / 20 = 0.05
+                            <br>
+                            ΔV / V = 0.1 / 5 = 0.02
+                        </div>
+                        <li><strong>Step 3:</strong> Calculate the fractional error for Density (Δρ / ρ) by adding the fractional errors:</li>
+                        <div class="math-block">
+                            Δρ / ρ = (ΔM / M) + (ΔV / V) = 0.05 + 0.02 = 0.07
+                        </div>
+                        <li><strong>Step 4:</strong> Convert the total fractional error back to an absolute error (Δρ):</li>
+                        <div class="math-block">
+                            Δρ = 0.07 × ρ = 0.07 × 4 g/cm³ = 0.28 g/cm³
+                        </div>
+                        <li><strong>Result:</strong> The Density is <strong>4 g/cm³ ± 0.28 g/cm³</strong>.</li>
+                    </ul>
+                </div>
+
+                <h4>Example 3: Powers (Exponent Multiplies Fractional Error)</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Calculate the Area (A) = L² of a square.</p>
+                    <p>Given: Length (L) = 5.0m ± 0.2m.</p>
+                    <ul class="step-list">
+                        <li>Step 1: Calculate the mean value of Area (A):</li>
+                        <div class="math-block">
+                            A = (5.0m)² = 25m²
+                        </div>
+                        <li>Step 2: Calculate the fractional error for Length (ΔL / L):</li>
+                        <div class="math-block">
+                            ΔL / L = 0.2 / 5.0 = 0.04
+                        </div>
+                        <li>Step 3: Calculate the fractional error for Area (ΔA / A) by multiplying the fractional error by the power (n=2):</li>
+                        <div class="math-block">
+                            ΔA / A = 2 × (ΔL / L) = 2 × 0.04 = 0.08
+                        </div>
+                        <li>Step 4: Calculate the absolute error (ΔA):</li>
+                        <div class="math-block">
+                            ΔA = 0.08 × A = 0.08 × 25m² = 2m²
+                        </div>
+                        <li><strong>Result:</strong> The Area is <strong>25m² ± 2m²</strong>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <section id="section-density" class="mb-12">
+                <h2>7. Density and Atomic Mass</h2>
+                <p>Density (ρ) is an intrinsic property of a substance, which means it doesn't depend on the amount of substance present. It relates the mass of a body to the volume it occupies:</p>
+                <div class="math-block">
+                    Density (ρ) = Mass / Volume
+                </div>
+                
+                <h3>7.1 Atomic Mass and Moles</h3>
+                <p>The atomic mass unit (u) is used to measure the mass of individual atoms. The concept of the mole links the atomic scale to the macroscopic scale.</p>
+                <ul class="simple-list">
+                    <li>Atomic Mass Unit: 1u is defined as 1/12th the mass of a single Carbon-12 atom. 1u = 1.66 × 10⁻²⁷kg.</li>
+                    <li>Avogadro's Number (Nₐ): This is the number of particles (atoms or molecules) in one mole of any substance.</li>
+                </ul>
+                <div class="math-block">
+                    Nₐ = 6.02 × 10²³ molecules/mole
+                </div>
+            </section>
+
+            <hr>
+
+            <section id="section-magnitude" class="mb-12">
+                <h2>8. Order of Magnitude</h2>
+                <p>The order of magnitude is the power of 10 that best approximates the size of a quantity. It is used for quick estimation and comparison of very large or very small numbers.</p>
+                
+                <h4>Step-by-Step for Finding the Order of Magnitude:</h4>
+                <ul class="step-list">
+                    <li><strong>Step 1:</strong> Express the quantity in standard scientific notation: A × 10ᵇ, where A is between 1 and 10.</li>
+                    <li><strong>Step 2:</strong> Check the coefficient A:
+                        <ul>
+                            <li>If A is less than 5 (A < 5), the order of magnitude is 10ᵇ.</li>
+                            <li>If A is 5 or greater (A ≥ 5), the order of magnitude is 10ᵇ⁺¹ (round up the exponent).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="solution-box">
+                    <p class="solution-title">Estimation Examples</p>
+                    <p>1. Quantity: 3.8 × 10⁴. Coefficient (3.8) < 5. Order of Magnitude: 10⁴.</p>
+                    <p>2. Quantity: 7.5 × 10⁻¹⁵. Coefficient (7.5) ≥ 5. Order of Magnitude: 10⁻¹⁵⁺¹ = 10⁻¹⁴.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

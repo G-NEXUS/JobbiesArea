@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Methods (MA110)</title>
+    
+    <style>
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 340px) {
+            .container-notes {
+                padding: 1.25rem;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem);
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .list-style-none > li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        
+        .list-style-none > li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-700);
+            font-weight: bold;
+        }
+
+        .definition-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0.5rem;
+        }
+
+        .definition-box .definition-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid var(--color-blue-500);
+        }
+
+        .zen {
+            background-color: var(--color-blue-600);
+            padding: 8px 24px;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .zen:hover {
+            background-color: var(--color-blue-700);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background-color: var(--color-slate-100);
+            border-bottom: 2px solid var(--color-slate-300);
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--color-gray-700);
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--color-slate-200);
+            color: var(--color-gray-700);
+        }
+
+        tr:hover {
+            background-color: var(--color-blue-50);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Mathematical Methods (MA110)</h2>
+            <a class="navbar-back" href="math.html">← Back to Math</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">MA 110</p>
+                <h1>Mathematical Methods</h1>
+                <p class="description">
+                    Copperbelt University • School of Mathematics and Natural Sciences<br>
+                    <strong>Instructor:</strong> Mr. W. Sakala (2018)
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p style="margin-top: 0;"><strong>Course Contents</strong></p>
+                <ul class="toc-list">
+                    <li><a href="#section-sets">1. Sets and Set Operations</a></li>
+                    <li><a href="#section-numbers">2. Set of Numbers</a></li>
+                    <li><a href="#section-binary">3. Binary Operations</a></li>
+                    <li><a href="#section-properties">4. Properties of Real Numbers</a></li>
+                    <li><a href="#section-absolute">5. Absolute Value</a></li>
+                    <li><a href="#section-exponents">6. Exponents and Indices</a></li>
+                </ul>
+            </nav>
+
+            <!-- SECTION 1: SETS -->
+            <section id="section-sets">
+                <h2>1. Sets and Set Operations</h2>
+
+                <h3>1.1 Definition of a Set</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.1: Set</p>
+                    <p>A set is a collection of distinct elements or objects.</p>
+                </div>
+
+                <p>Capital letters are used for names of sets and small letters for elements of a set. For instance:</p>
+                <ul class="list-style-none">
+                    <li>If x is an element of set A, we write: x ∈ A</li>
+                    <li>If x is not an element of A, we write: x ∉ A</li>
+                </ul>
+
+                <h4>Ways to Specify a Set</h4>
+                <p>A set can be specified in one of two ways:</p>
+                <ol class="numbered-list">
+                    <li>By listing the members of the collection</li>
+                    <li>By specifying what it is that the members have in common</li>
+                </ol>
+
+                <h4>Important Properties of Sets</h4>
+                <ul class="list-style-none">
+                    <li><strong>Well-defined:</strong> It must be possible to tell whether a given element belongs to a set</li>
+                    <li><strong>Distinct elements:</strong> Elements in a set should not be listed more than once</li>
+                    <li><strong>Order is not significant:</strong> The arrangement of elements does not matter</li>
+                </ul>
+
+                <h3>1.1.2 Notation and Examples</h3>
+                <p>Sets are denoted using braces {  }. For example: A = {1, 2, 3, 4, 5}</p>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 1.1.2</p>
+                    <p><strong>(a) Describe set A = {x | x is a counting number less than 5}</strong></p>
+                    <p>Solution: A = {1, 2, 3, 4}</p>
+                    <p><strong>(b) List the elements of set B = {x | x is a factor of 12}</strong></p>
+                    <p>Solution: B = {1, 2, 3, 4, 6, 12}</p>
+                </div>
+
+                <h3>1.1.3 Subsets</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.2: Subset</p>
+                    <p>Suppose A and B are sets. If every element of A is an element of B, then A is a subset of B. This is denoted A ⊆ B.</p>
+                </div>
+
+                <p><strong>Note:</strong> If A ⊆ B and A ≠ B, then A is a proper subset of B, denoted A ⊂ B.</p>
+
+                <h3>1.1.4 Equal Sets</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.3: Equal Sets</p>
+                    <p>Two sets A and B are equal (A = B) if they contain the same elements. That is: A = B if both A ⊆ B and B ⊆ A.</p>
+                </div>
+
+                <h3>1.1.5 The Empty Set</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.4: Empty Set</p>
+                    <p>The empty set or null set, denoted by ∅ or { }, is the set having no elements in it.</p>
+                </div>
+
+                <p><strong>Note:</strong> The null set is a subset of every other set.</p>
+
+                <h3>1.1.6 Universal Set</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.5: Universal Set</p>
+                    <p>The set containing the totality of elements for any particular discussion or situation is called the Universal set, denoted by U. It contains every other set under consideration.</p>
+                </div>
+
+                <h2>1.2 Basic Operations and Properties of Sets</h2>
+
+                <h3>1.2.1 Complement of a Set</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.6: Complement</p>
+                    <p>If A and B are sets, then A - B (or A \ B) is the set of all elements which belong to A but do not belong to B. That is: A - B = {x | x ∈ A and x ∉ B}</p>
+                </div>
+
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.7: Complement</p>
+                    <p>If U is the universal set and A is a set, then the complement of A denoted by A' or A^c is a set which contains all elements in the universal set that are not in set A.</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 1.1.3</p>
+                    <p>Let U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} and A = {2, 4, 6, 8, 10}. Find A'.</p>
+                    <p><strong>Solution:</strong> A' = {1, 3, 5, 7, 9}</p>
+                </div>
+
+                <h3>1.2.2 Union and Intersection</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 1.1.8: Union and Intersection</p>
+                    <p><strong>(a) Union (A ∪ B):</strong> The set of all elements which belong to A or B or both.</p>
+                    <p><strong>(b) Intersection (A ∩ B):</strong> The set of all elements which belong to both A and B.</p>
+                </div>
+
+                <h4>Intersection of Sets</h4>
+                <p>The intersection of sets A and B, denoted by A ∩ B, contains elements which are common to both set A and set B. That is: A ∩ B = {x | x ∈ A and x ∈ B}</p>
+
+                <p><strong>Disjoint Sets:</strong> Two sets are disjoint if their intersection is a null set. That is, A and B are disjoint if A ∩ B = ∅.</p>
+
+                <h4>Union of Sets</h4>
+                <p>The union of sets A and B, written as A ∪ B, is the set which contains all elements that belong to A or B or both. That is: A ∪ B = {x | x ∈ A or x ∈ B}</p>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 1.2.1</p>
+                    <p>Let A = {1, 2, 3, 4, 5} and B = {3, 4, 5, 6, 7}. Find:</p>
+                    <ul class="step-list">
+                        <li>A ∩ B = {3, 4, 5}</li>
+                        <li>A ∪ B = {1, 2, 3, 4, 5, 6, 7}</li>
+                        <li>A - B = {1, 2}</li>
+                    </ul>
+                </div>
+
+                <h3>1.2.3 Properties of Set Operations</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Theorem 1.2.3: Set Operation Properties</p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Commutativity</strong></td>
+                            <td>A ∪ B = B ∪ A<br>A ∩ B = B ∩ A</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Associativity</strong></td>
+                            <td>(A ∪ B) ∪ C = A ∪ (B ∪ C)<br>(A ∩ B) ∩ C = A ∩ (B ∩ C)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distributivity</strong></td>
+                            <td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)<br>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identity Laws</strong></td>
+                            <td>A ∪ ∅ = A<br>A ∩ U = A</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Complement Laws</strong></td>
+                            <td>A ∪ A' = U<br>A ∩ A' = ∅</td>
+                        </tr>
+                        <tr>
+                            <td><strong>De Morgan's Laws</strong></td>
+                            <td>(A ∪ B)' = A' ∩ B'<br>(A ∩ B)' = A' ∪ B'</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>1.2.4 De Morgan's Laws - Detailed Proof</h3>
+                <div class="solution-box">
+                    <p class="solution-title"><strong>Proof of De Morgan's First Law: (A ∪ B)' = A' ∩ B'</strong></p>
+                    <p>We need to show: (i) (A ∪ B)' ⊆ A' ∩ B' and (ii) A' ∩ B' ⊆ (A ∪ B)'</p>
+                    <p><strong>(i)</strong> Let x ∈ (A ∪ B)'. Then x ∉ (A ∪ B), which means x ∉ A and x ∉ B.<br>
+                    Therefore x ∈ A' and x ∈ B', so x ∈ A' ∩ B'.</p>
+                    <p><strong>(ii)</strong> Let x ∈ A' ∩ B'. Then x ∈ A' and x ∈ B', which means x ∉ A and x ∉ B.<br>
+                    Therefore x ∉ (A ∪ B), so x ∈ (A ∪ B)'.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION 2: NUMBERS -->
+            <section id="section-numbers">
+                <h2>2. Set of Numbers</h2>
+
+                <p>Several symbols are used to denote sets of numbers:</p>
+                <ul class="list-style-none">
+                    <li><strong>ℕ =</strong> Natural numbers (positive integers): {1, 2, 3, 4, 5, ...}</li>
+                    <li><strong>ℤ =</strong> Set of integers: {..., -2, -1, 0, 1, 2, ...}</li>
+                    <li><strong>ℚ =</strong> Set of rational numbers: {a/b | a and b are integers and b ≠ 0}</li>
+                    <li><strong>ℝ =</strong> Set of real numbers (union of rational and irrational numbers)</li>
+                </ul>
+
+                <h3>2.1 Rational Numbers</h3>
+                <p>Rational numbers can be expressed in the form a/b where a and b are integers and b ≠ 0.</p>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.1.1: Express Repeating Decimals as Fractions</p>
+                    <p><strong>Express 0.555... as a fraction</strong></p>
+                    <ul class="step-list">
+                        <li>Let x = 0.555... (i)</li>
+                        <li>Multiply by 10: 10x = 5.555... (ii)</li>
+                        <li>Subtract (i) from (ii): 9x = 5</li>
+                        <li>Therefore: x = 5/9</li>
+                    </ul>
+                </div>
+
+                <h3>2.2 Irrational Numbers</h3>
+                <p>An irrational number is a number that cannot be expressed in the form a/b when a and b are integers and b ≠ 0. Its decimal representation is non-repeating and non-terminating.</p>
+
+                <p><strong>Examples:</strong> π, e, √2, √3, √5, etc.</p>
+
+                <h4>Proofs that Numbers are Irrational</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.2.1: Prove that √2 is Irrational</p>
+                    <p><strong>Proof by Method of Contradiction:</strong></p>
+                    <ul class="step-list">
+                        <li>Suppose √2 is rational, so √2 = a/b where a and b are integers with no common factor</li>
+                        <li>Then: 2 = a²/b² (squaring both sides)</li>
+                        <li>So: a² = 2b²</li>
+                        <li>This means a² is even, therefore a is even. Let a = 2k</li>
+                        <li>Substituting: (2k)² = 2b², so 4k² = 2b², thus b² = 2k²</li>
+                        <li>This means b² is even, so b is also even</li>
+                        <li>But this contradicts our assumption that a and b have no common factor</li>
+                        <li>Therefore, √2 must be irrational</li>
+                    </ul>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.2.2: Prove that √3 is Irrational</p>
+                    <p><strong>Proof by Method of Contradiction:</strong></p>
+                    <ul class="step-list">
+                        <li>Suppose √3 = a/b where a and b have no common factor</li>
+                        <li>Then: 3 = a²/b², so a² = 3b²</li>
+                        <li>This means a has factor 3, so a = 3m</li>
+                        <li>Substituting: (3m)² = 3b², so 9m² = 3b², thus 3m² = b²</li>
+                        <li>This means b² has factor 3, so b has factor 3</li>
+                        <li>Both a and b have factor 3, contradicting our assumption</li>
+                        <li>Therefore, √3 is irrational</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION 3: BINARY OPERATIONS -->
+            <section id="section-binary">
+                <h2>3. Binary Operations on Real Numbers</h2>
+
+                <h3>3.1 Definition of Binary Operation</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 2.3.1: Binary Operation</p>
+                    <p>A binary operation denoted by * on a non-empty set S is a rule that associates to each pair of elements a and b in S a unique element a * b of S.</p>
+                </div>
+
+                <h4>Examples of Binary Operations</h4>
+                <ul class="list-style-none">
+                    <li><strong>Addition on ℕ:</strong> Addition is a binary operation on natural numbers because if a, b ∈ ℕ, then a + b ∈ ℕ</li>
+                    <li><strong>Subtraction on ℕ:</strong> NOT a binary operation because 3 - 5 = -2 ∉ ℕ</li>
+                    <li><strong>Addition and Subtraction on ℤ:</strong> Both ARE binary operations on integers</li>
+                </ul>
+
+                <h3>3.2 Properties of Binary Operations</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Binary Operation Properties</p>
+                    <p><strong>(i) Commutative:</strong> The operation * on set S is commutative if for every pair a, b in S: a * b = b * a</p>
+                    <p><strong>(ii) Associative:</strong> The operation * is associative if for all a, b, c in S: (a * b) * c = a * (b * c)</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 3.2.1: Testing Properties</p>
+                    <p>Define operation * on real numbers by a * b = a + b - ab. Is this operation commutative or associative?</p>
+                    <p><strong>Commutative:</strong> a * b = a + b - ab and b * a = b + a - ba = a + b - ab<br>
+                    Since a * b = b * a, the operation IS commutative.</p>
+                    <p><strong>Associative:</strong> We need to check if (a * b) * c = a * (b * c).<br>
+                    After calculation, these are NOT equal, so the operation is NOT associative.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION 4: PROPERTIES OF REAL NUMBERS -->
+            <section id="section-properties">
+                <h2>4. Properties of Real Numbers</h2>
+
+                <h3>4.1 Algebraic Properties</h3>
+                <p>If a, b, and c are members of real numbers ℝ, then:</p>
+
+                <ol class="numbered-list">
+                    <li><strong>Commutative Law of Addition:</strong> a + b = b + a</li>
+                    <li><strong>Associative Law of Addition:</strong> (a + b) + c = a + (b + c)</li>
+                    <li><strong>Additive Identity:</strong> There exists an element 0 such that a + 0 = a (adding identity element)</li>
+                    <li><strong>Additive Inverse:</strong> For all a, there exists -a such that a + (-a) = 0 and (-a) + a = 0</li>
+                    <li><strong>Commutative Law of Multiplication:</strong> a · b = b · a</li>
+                    <li><strong>Associative Law of Multiplication:</strong> (a · b) · c = a · (b · c)</li>
+                    <li><strong>Multiplicative Identity:</strong> There exists 1 such that a · 1 = a and 1 · a = a</li>
+                    <li><strong>Multiplicative Inverse:</strong> For each a ≠ 0, there exists 1/a such that a · (1/a) = 1 and (1/a) · a = 1</li>
+                    <li><strong>Distributive Laws:</strong> a(b + c) = ab + ac and (a + b)c = ac + bc for all a, b, c ∈ ℝ</li>
+                </ol>
+
+                <h3>4.2 Order Relations</h3>
+                <p>Let a, b be members of real numbers ℝ. Then:</p>
+                <ul class="list-style-none">
+                    <li>a < b means a is less than b</li>
+                    <li>a > b means a is greater than b</li>
+                    <li>a ≤ b means a is less than or equal to b</li>
+                    <li>a ≥ b means a is greater than or equal to b</li>
+                </ul>
+
+                <p><strong>Law of Trichotomy:</strong> If a, b ∈ ℝ, then either a < b or a = b or a > b</p>
+            </section>
+
+            <hr>
+
+            <!-- SECTION 5: ABSOLUTE VALUE -->
+            <section id="section-absolute">
+                <h2>5. Absolute Value of Real Numbers</h2>
+
+                <p>On a number line, the distance between a point a and zero is called the absolute value of a. The absolute value of a is denoted by |a|.</p>
+
+                <div class="definition-box">
+                    <p class="definition-title">Definition 2.4.1: Absolute Value</p>
+                    <p>For any a ∈ ℝ, the absolute value is given as:</p>
+                    <p>|a| = a if a ≥ 0<br>
+                    |a| = -a if a < 0</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.4.2: Evaluate Absolute Values</p>
+                    <ul class="step-list">
+                        <li>|5| = 5</li>
+                        <li>|-3| = 3</li>
+                        <li>|0| = 0</li>
+                        <li>|-7.5| = 7.5</li>
+                    </ul>
+                </div>
+
+                <h3>5.1 Properties of Absolute Values</h3>
+                <p>If a, b ∈ ℝ, then:</p>
+                <ul class="list-style-none">
+                    <li><strong>(a)</strong> |a| ≥ 0 (The absolute value is always non-negative)</li>
+                    <li><strong>(b)</strong> |a| = |-a| (The absolute value of a number equals the absolute value of its opposite)</li>
+                    <li><strong>(c)</strong> |ab| = |a||b| for all a, b ∈ ℝ</li>
+                </ul>
+
+                <h3>5.2 Equations Involving Absolute Values</h3>
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.4.3(a): Solve |x| = 5</p>
+                    <p>Since |x| = 5, then x = 5 or x = -5</p>
+                    <p><strong>Solution set:</strong> {-5, 5}</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.4.3(b): Solve |2x - 1| = 7</p>
+                    <ul class="step-list">
+                        <li>2x - 1 = 7 or 2x - 1 = -7</li>
+                        <li>2x = 8 or 2x = -6</li>
+                        <li>x = 4 or x = -3</li>
+                    </ul>
+                    <p><strong>Solution set:</strong> {-3, 4}</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 2.4.3(c): Solve |x| = -2</p>
+                    <p>The absolute value of a real number can never be negative.</p>
+                    <p><strong>Solution set:</strong> ∅ (Empty set - no solution)</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION 6: EXPONENTS -->
+            <section id="section-exponents">
+                <h2>6. Exponents, Laws of Indices and Surds</h2>
+
+                <h3>6.1 Definition of Exponents</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 3.1.1: Exponent</p>
+                    <p>If n is a positive integer and a is any real number, then:</p>
+                    <p>aⁿ = a · a · a · ... · a (n times)</p>
+                    <p>The number a is called the base and n is called the exponent.</p>
+                </div>
+
+                <h3>6.2 Properties of Exponents</h3>
+                <p>If a and b are real numbers and m and n are positive integers, then:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Formula</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product</td>
+                            <td>aᵐ · aⁿ = aᵐ⁺ⁿ</td>
+                            <td>Product of two powers</td>
+                        </tr>
+                        <tr>
+                            <td>Power of a Power</td>
+                            <td>(aᵐ)ⁿ = aᵐⁿ</td>
+                            <td>Exponent to an exponent</td>
+                        </tr>
+                        <tr>
+                            <td>Power of a Product</td>
+                            <td>(ab)ⁿ = aⁿbⁿ</td>
+                            <td>Distribute exponent over product</td>
+                        </tr>
+                        <tr>
+                            <td>Power of a Quotient</td>
+                            <td>(a/b)ⁿ = aⁿ/bⁿ if b ≠ 0</td>
+                            <td>Distribute exponent over quotient</td>
+                        </tr>
+                        <tr>
+                            <td>Quotient of Powers</td>
+                            <td>aᵐ/aⁿ = aᵐ⁻ⁿ when a ≠ 0</td>
+                            <td>Quotient of two powers</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>6.3 Zero and Negative Integer Exponents</h3>
+                <div class="definition-box">
+                    <p class="definition-title">Definition 3.1.3: Zero Exponent</p>
+                    <p>If a is a non-zero real number, then a⁰ = 1</p>
+                </div>
+
+                <div class="definition-box">
+                    <p class="definition-title">Definition 3.1.4: Negative Integer Exponent</p>
+                    <p>If n is a positive integer and a is a non-zero real number, then:</p>
+                    <p>a⁻ⁿ = 1/aⁿ</p>
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example 3.1.5: Evaluate Expressions with Exponents</p>
+                    <ul class="step-list">
+                        <li><strong>Evaluate (2³)²:</strong> (2³)² = 2⁶ = 64</li>
+                        <li><strong>Evaluate 3⁻²:</strong> 3⁻² = 1/3² = 1/9</li>
+                        <li><strong>Evaluate 5⁰:</strong> 5⁰ = 1</li>
+                        <li><strong>Evaluate (2/3)⁻²:</strong> (2/3)⁻² = (3/2)² = 9/4</li>
+                    </ul>
+                </div>
+
+                <h3>6.4 Simplifying Expressions with Exponents</h3>
+                <div class="solution-box">
+                    <p class="solution-title">Example 3.1.6: Simplify Expressions</p>
+                    <p><strong>(a) Simplify x⁵ · x³ · x⁻²</strong></p>
+                    <p>Solution: x⁵ · x³ · x⁻² = x⁵⁺³⁻² = x⁶</p>
+                    <p><strong>(b) Simplify (a⁴b²)/(a²b)</strong></p>
+                    <p>Solution: (a⁴b²)/(a²b) = a⁴⁻² · b²⁻¹ = a² · b = a²b</p>
+                </div>
+
+                <h3>6.5 Review Exercises</h3>
+                <ol class="numbered-list">
+                    <li>Evaluate each expression:
+                        <ul class="simple-list">
+                            <li>2³ · 2²</li>
+                            <li>(3²)²</li>
+                            <li>5⁰ + 2⁻¹</li>
+                        </ul>
+                    </li>
+                    <li>Simplify and express without negative exponents:
+                        <ul class="simple-list">
+                            <li>x⁵y⁻³</li>
+                            <li>(2x²)⁻¹</li>
+                            <li>a³b²/a⁻¹b³</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+
+        </div>
+    </div>
+
+</body>
+</html>

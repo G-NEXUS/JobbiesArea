@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>PH 110: Chapter 3 - Kinematics (Enhanced Notes)</title>
+    
+    <style>
+        /* Define color variables for consistency */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem/Box Styles */
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        /* Step List */
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        /* Math Blocks */
+        .math-display, .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: var(--color-blue-800);
+            background-color: var(--color-blue-50);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .math-block {
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+        }
+
+        .zen{
+            background-color: var(--color-blue-600);
+            padding: 8px 24px;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .zen:hover {
+            background-color: var(--color-blue-700);
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--color-blue-700);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body, .container-notes, .toc-nav {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            .toc-nav {
+                padding: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .toc-list {
+                gap: 0.125rem 0.5rem !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Step list responsive */
+        @media (max-width: 480px) {
+            .step-list {
+                padding-left: 0 !important;
+            }
+            
+            .step-list li {
+                margin-bottom: 0.75rem !important;
+                padding-left: 1.75rem !important;
+            }
+            
+            .step-list li::before {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Motion in Two Dimensions (PH 110)</h2>
+            <a class="navbar-back" href="physics.html">← Back to Physics</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                
+                <p class="subtitle">PH 110 - Lecture Notes</p>
+                <h1>
+                    **Chapter 3: Kinematics**
+                </h1>
+                <p class="description">
+                    <span class="highlight">Kinematics</span> is the branch of mechanics that describes the **motion of objects** in relation to time, **without** considering the forces or causes (like pushes or pulls) of that motion. We treat moving objects as a **particle** (a point-like object) to simplify the analysis.
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p class="toc-title">Chapter Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-motion">1. Fundamentals of Motion</a></li>
+                    <li><a href="#section-1d">2. Motion in One Dimension (1D)</a></li>
+                    <li><a href="#section-ueq">3. Uniformly Accelerated Motion (UAM)</a></li>
+                    <li><a href="#section-2d">4. Motion in Two Dimensions (2D)</a></li>
+                    <li><a href="#section-proj">5. Projectile Motion (Example of 2D)</a></li>
+                </ul>
+            </nav>
+
+            <section id="section-motion" class="mb-12">
+                <h2>1. **Fundamentals of Motion**</h2>
+                
+                <h3>1.1 Motion Definition</h3>
+                <p>An object is in **motion** if its <span class="highlight">position continuously changes</span> with respect to a chosen reference frame (its surroundings). The path it follows is called its **trajectory**.</p>
+                
+                <h3>1.2 Types of Motion</h3>
+                <ul class="simple-list">
+                    <li>**One-Dimensional (1D) Motion:** Motion along a **straight line**, requiring only one coordinate (like x or y) to describe its position.
+                        <br>Example: A car moving on a straight road.</li>
+                    <li>**Two-Dimensional (2D) Motion:** Motion in a **plane**, requiring two coordinates (x, y) to track the object.
+                        <br>Example: A frisbee flying or a boat on a lake.</li>
+                </ul>
+            </section>
+            
+            <hr>
+
+            <section id="section-1d" class="mb-12">
+                <h2>2. Motion in One Dimension (1D)</h2>
+                
+                <h3>2.1 Distance (Scalar) and Displacement (x⇀, Vector)</h3>
+                <p>The <span class="highlight">Distance</span> is the **actual length of the path** traversed (a **Scalar**). The <span class="highlight">Displacement</span> is the **change in position** (a **Vector**).</p>
+                
+                <div class="math-block">
+                    Displacement x⇀ = x_f - x_i
+                </div>
+                
+                <div class="solution-box">
+                    <p class="solution-title">Clarification: Distance vs. Displacement</p>
+                    <p>If a person walks 10 m East and 10 m West, they return to their starting point.</p>
+                    <ul class="simple-list">
+                        <li>Total Distance: 10 m + 10 m = 20 m.</li>
+                        <li>**Total Displacement (x⇀): 10 m - 10 m = **0 m**.</li>
+                    </ul>
+                </div>
+
+                <h3>2.2 Speed (Scalar) and Velocity (v⇀, Vector)</h3>
+                
+                <h4>(a) Average Speed</h4>
+                <p>The rate of distance covered over time.</p>
+                <div class="math-block">
+                    Average speed = Total distance / Time interval
+                </div>
+
+                <h4>(b) Average Velocity (v⇀)</h4>
+                <p>The rate of **displacement** over time (a **Vector**).</p>
+                <div class="math-block">
+                    Average velocity = Displacement / Time interval = Δx / Δt
+                </div>
+                
+                <h4>(c) Instantaneous Velocity (v⇀)</h4>
+                <p>The velocity at an **exact moment**. This is the derivative of position (x) with respect to time (t):</p>
+                <div class="math-block">
+                    v⇀ = dx / dt
+                </div>
+
+                <h3>2.3 Acceleration (a⇀, Vector)</h3>
+                <p>Acceleration is the time rate of **change of velocity**. It is a **Vector** with units of m/s&sup2;.</p>
+                <div class="math-block">
+                    Average acceleration = Change in velocity / Time interval = Δv / Δt
+                </div>
+                <p>When the direction of acceleration is opposite to the direction of velocity, the object is slowing down, which is called **deceleration**.</p>
+            </section>
+            
+            <hr>
+
+            <section id="section-ueq" class="mb-12">
+                <h2>3. **Uniformly Accelerated Motion (UAM)**</h2>
+                <p>This is motion where the **acceleration (a)** is **constant** (or uniform) over the entire time interval. This simplifies the analysis greatly.</p>
+
+                <h3>3.1 The Kinematic Equations (When acceleration 'a' is constant)</h3>
+                <p>These four equations relate initial velocity (v_0), final velocity (v), acceleration (a), time (t), and displacement (s).</p>
+
+                <h4>(i) Velocity-Time Relation</h4>
+                <div class="math-block">
+                    v = v_0 + a t
+                </div>
+
+                <h4>(ii) Position-Time Relation (Displacement)</h4>
+                <div class="math-block">
+                    s = v_0 t + 0.5 a t&sup2;
+                </div>
+
+                <h4>(iii) Position-Velocity Relation (Time-Independent)</h4>
+                <div class="math-block">
+                    v&sup2; = v_0&sup2; + 2 a s
+                </div>
+
+                <h4>(iv) Displacement based on Average Velocity</h4>
+                <div class="math-block">
+                    s = ( (v + v_0) / 2 ) t
+                </div>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example: Stopping a Car</p>
+                    <p>A car is traveling at 30 m/s (v_0) and brakes with a uniform deceleration of -6.0 m/s&sup2; (a). What distance (s) does the car travel before coming to a complete stop (v = 0 m/s)?</p>
+                    <ul class="step-list">
+                        <li>**Given:** v_0 = 30 m/s, v = 0 m/s, a = -6.0 m/s&sup2;.</li>
+                        <li>**Equation Choice:** Use v&sup2; = v_0&sup2; + 2 a s.</li>
+                        <div class="math-block">
+                            0&sup2; = 30&sup2; + 2 x (-6.0) x s
+                            <br>
+                            0 = 900 - 12 s
+                            <br>
+                            12 s = 900
+                            <br>
+                            s = 900 / 12 = **75 m**
+                        </div>
+                    </ul>
+                    <p>**Result:** The car travels **75 m** before stopping.</p>
+                </div>
+                
+                <h3>3.2 Special Case: Free Fall Motion</h3>
+                <p>This occurs when the object's acceleration is due to gravity (g), approximately 9.8 m/s&sup2;. Using the upward direction as positive means the acceleration is $a = -g$.</p>
+                <div class="solution-box">
+                    <p class="solution-title">Free Fall Equations (using $a = -g$)</p>
+                    <div class="math-block">
+                        v = v_0 - g t
+                        <br>
+                        y = y_0 + v_0 t - 0.5 g t&sup2;
+                        <br>
+                        v&sup2; = v_0&sup2; - 2 g ( y - y_0 )
+                    </div>
+                </div>
+
+            </section>
+
+            <hr>
+
+            <section id="section-2d" class="mb-12">
+                <h2>4. **Motion in Two Dimensions (2D)**</h2>
+                <p>2D motion is broken down into two independent 1D motions: one along the **x-direction** and one along the **y-direction**. The quantity that links these two is **time** ($t$).</p>
+
+                <h3>4.1 Vector Components</h3>
+                <p>All vector quantities in 2D are expressed using unit vectors i⇀ (x-axis) and j⇀ (y-axis).</p>
+                
+                <ul class="simple-list">
+                    <li>**Position Vector (r⇀):** r⇀ = x i⇀ + y j⇀</li>
+                    <li>**Velocity Vector (v⇀):** v⇀ = v_x i⇀ + v_y j⇀</li>
+                    <li>**Acceleration Vector (a⇀):** a⇀ = a_x i⇀ + a_y j⇀</li>
+                </ul>
+                <p>The magnitude (size) of the velocity vector is found using the Pythagorean theorem:</p>
+                <div class="math-block">
+                    Magnitude v = sqrt ( v_x&sup2; + v_y&sup2; )
+                </div>
+
+            </section>
+            
+            <hr>
+
+            <section id="section-proj" class="mb-12">
+                <h2>5. **Projectile Motion (A 2D Example)**</h2>
+                <p>A **projectile** is any object moving under the influence of gravity alone. Its path is always a **parabola**.</p>
+
+                <h3>5.1 Key Principles</h3>
+                <ul class="simple-list">
+                    <li>**Horizontal Motion (x):** Acceleration is **zero** ($a_x = 0$). The velocity $v_x$ is **constant**.</li>
+                    <li>**Vertical Motion (y):** Acceleration is constant: $a_y = -g$ (The motion is uniformly accelerated).</li>
+                </ul>
+
+                <h3>5.2 Initial Velocity Components</h3>
+                <p>If a projectile is launched with initial speed $v_0$ at an angle $\emptyset$:</p>
+                <div class="math-block">
+                    v_0x = v_0 cos(∅)
+                    <br>
+                    v_0y = v_0 sin(∅)
+                </div>
+
+                <h3>5.3 Important Projectile Parameters</h3>
+                <p>Assuming the object lands at the same height it was launched from ($y_0=y=0$).</p>
+                
+                <ul class="step-list">
+                    <li>**Time of Flight (T):** Total time in the air.
+                        <div class="math-block">
+                            T = ( 2 v_0 sin(∅) ) / g
+                        </div>
+                    </li>
+                    <li>**Maximum Height (H):** The highest point reached.
+                        <div class="math-block">
+                            H = ( v_0&sup2; sin&sup2;(∅) ) / ( 2 g )
+                        </div>
+                    </li>
+                    <li>**Horizontal Range (R):** The total horizontal distance traveled.
+                        <div class="math-block">
+                            R = ( v_0&sup2; sin(2 ∅) ) / g
+                        </div>
+                        <p>The maximum range is achieved when the launch angle ∅ is **45°**.</p>
+                    </li>
+                </ul>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example: Projectile Range</p>
+                    <p>A football is kicked with an initial speed of 20 m/s (v_0) at an angle of 30° ($\emptyset$). Find its horizontal range (R), using g = 10 m/s&sup2; and sin(2 x 30°) = sin(60°) $\approx$ 0.866.</p>
+                    <ul class="step-list">
+                        <li>**Given:** v_0 = 20 m/s, $\emptyset$ = 30°, g = 10 m/s&sup2;.</li>
+                        <li>**Equation:** Use the Range formula.</li>
+                        <div class="math-block">
+                            R = ( v_0&sup2; sin(2 ∅) ) / g
+                            <br>
+                            R = ( 20&sup2; sin(2 x 30°) ) / 10
+                            <br>
+                            R = ( 400 x sin(60°) ) / 10
+                            <br>
+                            R = ( 400 x 0.866 ) / 10
+                            <br>
+                            R = 346.4 / 10 = **34.64 m**
+                        </div>
+                    </ul>
+                    <p>**Result:** The horizontal range is approximately **34.64 m**.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

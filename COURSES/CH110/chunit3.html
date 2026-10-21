@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH 110: Aqueous Chemistry</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    
+    <style>
+        /* Define color variables for consistency (using the original blue palette) */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+        }
+        
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-nav .toc-title {
+            font-weight: 700;
+            color: var(--color-blue-700);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+        
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-style-none > li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        .list-style-none > li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-700);
+            font-weight: bold;
+        }
+        
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            max-width: 100%;
+        }
+        
+        table {
+            min-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        thead {
+            background-color: var(--color-slate-100);
+            border-bottom: 1px solid var(--color-slate-200);
+        }
+
+        th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-bottom: 1px solid var(--color-slate-200);
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem Styles */
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid var(--color-blue-500);
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* Font Scaling */
+        h1 { font-size: clamp(1.5rem, 5vw, 3rem) !important; }
+        h2 { font-size: clamp(1.25rem, 4vw, 1.875rem) !important; }
+        h3 { font-size: clamp(1rem, 3vw, 1.5rem) !important; }
+        h4 { font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important; }
+        p { font-size: clamp(0.875rem, 2vw, 1rem) !important; }
+        body, .container-notes, .toc-nav { font-size: clamp(0.75rem, 1.5vw, 0.95rem); }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .main-wrapper { padding: 1rem 0.5rem !important; }
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+                width: 95% !important;
+            }
+            .math-block {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">General Chemistry Notes</h2>
+            <a class="navbar-back" href="chem.html">&larr; Back to Chemistry</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">CH 110 Topic 3 Notes</p>
+                <h1>Aqueous Chemistry</h1>
+                <p class="description">
+                    Core concepts covering the nature of aqueous solutions, types of chemical reactions, and the principles of stoichiometry in precipitation, acid-base, and redox processes.
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p class="toc-title">Table of Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-water">1. Water, The Common Solvent</a></li>
+                    <li><a href="#section-electrolytes">2. Strong and Weak Electrolytes</a></li>
+                    <li><a href="#section-composition">3. The Composition of Solutions</a></li>
+                    <li><a href="#section-reaction-types">4. Types of Chemical Reactions</a></li>
+                    <li><a href="#section-precipitation">5. Precipitation Reactions</a></li>
+                    <li><a href="#section-describing">6. Describing Reactions in Solution</a></li>
+                    <li><a href="#section-acid-base">7. Acid-Base Reactions</a></li>
+                    <li><a href="#section-redox">8. Oxidation-Reduction Reactions</a></li>
+                    <li><a href="#section-balancing-redox">9. Balancing Redox Equations</a></li>
+                </ul>
+            </nav>
+
+
+            <section id="section-water" class="mb-12">
+                <h2>1. Water, The Common Solvent</h2>
+
+                <p>
+                    Much of the chemistry that affects each of us occurs among substances dissolved in water.
+                </p>
+
+                <h3>1.1 Structure of Water</h3>
+                <ul class="simple-list">
+                    <li>Oxygen's electronegativity is high (3.5) and hydrogen's is low (2.1).</li>
+                    <li>Water is a <b>bent molecule</b>.</li>
+                    <li>Water is a <b>polar molecule</b>, possessing a positive end and a negative end.</li>
+                </ul>
+
+                <h3>1.2 Hydration of Solutes</h3>
+                <ul class="list-style-none">
+                    <li><b>Ionic Solute Molecules:</b> Positive ions are attracted to the oxygen end of water, while negative ions are attracted to the hydrogen end.</li>
+                    <li><b>Polar Solute Molecules:</b> The negative end of a polar solute is attracted to water's hydrogen, and the positive end is attracted to water's oxygen.</li>
+                    <li><b>"Like Dissolves Like":</b> Polar and ionic compounds dissolve in polar solvents like water. Nonpolar compounds like fats dissolve in nonpolar solvents like petrol.</li>
+                </ul>
+            </section>
+
+            <section id="section-electrolytes" class="mb-12">
+                <h2>2. Strong and Weak Electrolytes</h2>
+
+                <p>
+                    An <b>electrolyte</b> is a substance that when dissolved in water produces a solution that can conduct an electric current.
+                </p>
+
+                <h3>2.1 Types of Electrolytes</h3>
+                <ul class="simple-list">
+                    <li>
+                        <b>Strong Electrolytes:</b> Conduct current very efficiently because they are completely ionized in water.
+                        <ul>
+                            <li>Ionic compounds / salts (e.g., NaCl(aq))</li>
+                            <li>Strong acids (e.g., HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub>, HCl)</li>
+                            <li>Strong bases (e.g., NaOH, KOH)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Weak Electrolytes:</b> Conduct only a small current because they are slightly ionized in solution.
+                        <ul>
+                            <li>Weak acids (e.g., organic acids like acetic, citric, butyric)</li>
+                            <li>Weak bases (e.g., ammonia)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Nonelectrolytes:</b> Conduct no current because there are no ions present in solution (e.g., alcohols, sugars).
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-composition" class="mb-12">
+                <h2>3. The Composition of Solutions</h2>
+
+                <p>
+                    To perform stoichiometric calculations, we must know the exact forms the chemicals take when dissolved and the amounts of chemicals present (concentrations).
+                </p>
+
+                <h3>3.1 Molarity</h3>
+                <p>
+                    Molarity (M) is defined as moles of solute per volume of solution in liters.
+                </p>
+                <div class="math-block">Molarity (M) = Moles of solute (n) / Litres of solution (V)</div>
+                
+                <div class="solution-box">
+                    <p class="solution-title">Example Problem: Finding Molarity</p>
+                    <p>Calculate the concentration in moles per liter of a solution of calcium chloride made by dissolving 27g of calcium chloride to make 500ml of solution.</p>
+                    <ul class="step-list">
+                        <li>Find the molar mass of CaCl<sub>2</sub>: 40.08 + 2(35.45) = 110.98 g/mol.</li>
+                        <li>Find moles (n): n = 27 g / 110.98 g/mol = 0.24 mol.</li>
+                        <li>Convert volume to Litres: V = 500 ml = 0.500 L.</li>
+                        <li>Calculate Molarity: M = 0.24 mol / 0.500 L = <b>0.48 mol/L</b>.</li>
+                    </ul>
+                </div>
+
+                <h3>3.2 Concentration of Ions and Dilution</h3>
+                <ul class="list-style-none">
+                    <li><b>Concentration of Ions:</b> Ionic compounds dissociate in solution. Multiply the solution's molarity by the subscript value of the ion in the formula.</li>
+                    <li><b>Moles from Concentration:</b> You can find moles using <b>n = V &times; M</b>.</li>
+                    <li><b>Dilution:</b> Diluting a solution with water does not change the number of moles present. Use the formula:
+                        <div class="math-block">M<sub>1</sub>V<sub>1</sub> = M<sub>2</sub>V<sub>2</sub></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-reaction-types" class="mb-12">
+                <h2>4. Types of Chemical Reactions</h2>
+                <ul class="simple-list">
+                    <li><b>Precipitation Reactions:</b> When two solutions are mixed, an insoluble solid forms.</li>
+                    <li><b>Acid-Base Reactions:</b> A soluble hydroxide and a soluble acid react to form water and a salt.</li>
+                    <li><b>Oxidation-Reduction (Redox) Reactions:</b> Reactions in which one or more electrons are transferred.</li>
+                </ul>
+            </section>
+
+            <section id="section-precipitation" class="mb-12">
+                <h2>5. Precipitation Reactions</h2>
+
+                <p>
+                    Ionic compounds dissolve in water, and the ions separate and move independently. To determine products, you "switch partners" of the reactant ions.
+                </p>
+
+                <h3>5.1 Determining the Precipitate</h3>
+                <p>
+                    For example, reacting AgNO<sub>3</sub>(aq) + NaCl(aq): The possible products are AgCl and NaNO<sub>3</sub>. Based on solubility rules, AgCl is insoluble, so it forms a white precipitate. If there is no insoluble product, no reaction occurs.
+                </p>
+
+                <h3>5.2 Solubility Rules</h3>
+                <ol class="numbered-list">
+                    <li>Most nitrate (NO<sub>3</sub><sup>-</sup>) salts are soluble.</li>
+                    <li>Most salts containing alkali metal ions (Li<sup>+</sup>, Na<sup>+</sup>, K<sup>+</sup>) and the ammonium (NH<sub>4</sub><sup>+</sup>) ion are soluble.</li>
+                    <li>Most chloride, bromide, and iodide salts are soluble, <i>except</i> those containing Ag<sup>+</sup>, Pb<sup>2+</sup>, and Hg<sup>2+</sup>.</li>
+                    <li>Most sulphate salts are soluble, <i>except</i> BaSO<sub>4</sub>, PbSO<sub>4</sub>, HgSO<sub>4</sub>, and CaSO<sub>4</sub>.</li>
+                    <li>Most hydroxide salts are slightly soluble (NaOH and KOH are soluble; Ba(OH)<sub>2</sub>, Sr(OH)<sub>2</sub>, and Ca(OH)<sub>2</sub> are marginally soluble).</li>
+                    <li>Most sulphide, carbonate, chromate, and phosphate salts are only slightly soluble.</li>
+                </ol>
+            </section>
+
+            <section id="section-describing" class="mb-12">
+                <h2>6. Describing Reactions in Solution</h2>
+                
+                <ul class="list-style-none">
+                    <li><b>Molecular Equation:</b> Gives the overall reaction stoichiometry.
+                        <div class="math-block">Na<sub>2</sub>CO<sub>3</sub>(aq) + Ca(NO<sub>3</sub>)<sub>2</sub>(aq) &rarr; 2NaNO<sub>3</sub>(aq) + CaCO<sub>3</sub>(s)</div>
+                    </li>
+                    <li><b>Complete Ionic Equation:</b> Represents all strong electrolytes as separated ions.
+                        <div class="math-block">2Na<sup>+</sup>(aq) + CO<sub>3</sub><sup>2-</sup>(aq) + Ca<sup>2+</sup>(aq) + 2NO<sub>3</sub><sup>-</sup>(aq) &rarr; 2Na<sup>+</sup>(aq) + 2NO<sub>3</sub><sup>-</sup>(aq) + CaCO<sub>3</sub>(s)</div>
+                    </li>
+                    <li><b>Net Ionic Equation:</b> Includes only components that take part in the chemical change. Spectator ions are eliminated.
+                        <div class="math-block">Ca<sup>2+</sup>(aq) + CO<sub>3</sub><sup>2-</sup>(aq) &rarr; CaCO<sub>3</sub>(s)</div>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-acid-base" class="mb-12">
+                <h2>7. Acid-Base (Neutralization) Reactions</h2>
+
+                <h3>7.1 Definitions</h3>
+                <ul class="simple-list">
+                    <li><b>Bronsted:</b> Acids are proton donors, bases are proton acceptors.</li>
+                    <li><b>Arrhenius:</b> Acids produce H<sup>+</sup> in water, bases produce OH<sup>-</sup> ions in solution.</li>
+                </ul>
+                <p>
+                    The net ionic equation for a strong acid-base reaction is usually:
+                    <b>H<sup>+</sup>(aq) + OH<sup>-</sup>(aq) &rarr; H<sub>2</sub>O(l)</b>
+                </p>
+
+                <h3>7.2 Acid-Base Titrations</h3>
+                <ul class="list-style-none">
+                    <li><b>Titrant:</b> Solution of known concentration.</li>
+                    <li><b>Analyte:</b> Solution of unknown concentration.</li>
+                    <li><b>Equivalence Point:</b> Point at which the amount of titrant added results in perfect neutralization.</li>
+                    <li><b>Indicator:</b> A substance that changes color at the equivalence point.</li>
+                    <li><b>Endpoint:</b> The actual point at which the indicator changes color.</li>
+                </ul>
+            </section>
+
+            <section id="section-redox" class="mb-12">
+                <h2>8. Oxidation-Reduction (Redox) Reactions</h2>
+
+                <p>
+                    Oxidation-reduction reactions are characterized by a transfer of electrons. 
+                </p>
+                <ul class="simple-list">
+                    <li><b>Oxidation:</b> Loss of electrons, increase in oxidation state. This substance is the <i>reducing agent</i>.</li>
+                    <li><b>Reduction:</b> Gain of electrons, decrease in oxidation state. This substance is the <i>oxidizing agent</i>.</li>
+                    <li><i>Mnemonic:</i> LEO (Lose Electrons = Oxidation) says GER (Gain Electrons = Reduction).</li>
+                </ul>
+
+                <h3>8.1 Rules for Assigning Oxidation Numbers</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rule</th>
+                                <th>Summary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>The oxidation number of an atom of a free element is zero.</td><td>Element = 0</td></tr>
+                            <tr><td>The oxidation number of a monatomic ion equals its charge.</td><td>Ion = Charge</td></tr>
+                            <tr><td>In compounds, oxygen is -2, except in peroxides where it is -1.</td><td>Oxygen = -2</td></tr>
+                            <tr><td>In compounds, hydrogen has an oxidation number of +1.</td><td>Hydrogen = +1</td></tr>
+                            <tr><td>In compounds, fluorine is ALWAYS assigned -1.</td><td>Fluorine = -1</td></tr>
+                            <tr><td>The sum of the oxidation states for an electrically neutral compound must be zero.</td><td>Sum = 0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    <i>Example:</i> Combustion of methane: CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) &rarr; CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g). Carbon changes from -4 to +4 (oxidation), and oxygen changes from 0 to -2 (reduction). CH<sub>4</sub> is the reducing agent, and O<sub>2</sub> is the oxidizing agent.
+                </p>
+            </section>
+
+            <section id="section-balancing-redox" class="mb-12">
+                <h2>9. Balancing Oxidation-Reduction Equations</h2>
+
+                <h3>9.1 Ion-Electron (Half-Reaction) Method</h3>
+                <p>
+                    This method is preferred for complex reactions (like those involving oxo anions such as Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> or MnO<sub>4</sub><sup>-</sup>). 
+                </p>
+
+                <div class="solution-box">
+                    <p class="solution-title">Steps for Balancing in Acidic Medium</p>
+                    <ul class="step-list">
+                        <li><b>Step 1:</b> Write the unbalanced equation in ion form.</li>
+                        <li><b>Step 2:</b> Separate the equation into an oxidation half-reaction and a reduction half-reaction.</li>
+                        <li><b>Step 3:</b> Balance all atoms other than O and H.</li>
+                        <li><b>Step 4:</b> Add H<sub>2</sub>O to balance O atoms. Then add H<sup>+</sup> ions to balance H atoms.</li>
+                        <li><b>Step 5:</b> Add electrons (e<sup>-</sup>) to one side of each half-reaction to balance the charges. Multiply half-reactions by integers to equalize the number of electrons.</li>
+                        <li><b>Step 6:</b> Add the half-reactions together and cancel identical species (including electrons).</li>
+                        <li><b>Step 7:</b> Verify that atoms and charges are balanced.</li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 1rem;">
+                    <b>Note for Basic Solutions:</b> Follow all the steps above as if it were acidic. Then, for every H<sup>+</sup> ion present in the final equation, add an equal number of OH<sup>-</sup> ions to <i>both</i> sides. Combine H<sup>+</sup> and OH<sup>-</sup> on the same side to form H<sub>2</sub>O, and cancel any redundant H<sub>2</sub>O molecules.
+                </p>
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH 110: Gases</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    
+    <style>
+        /* Define color variables for consistency (using the original blue palette) */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+        }
+        
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-nav .toc-title {
+            font-weight: 700;
+            color: var(--color-blue-700);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+        
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-style-none > li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        .list-style-none > li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-700);
+            font-weight: bold;
+        }
+        
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            max-width: 100%;
+        }
+        
+        table {
+            min-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        thead {
+            background-color: var(--color-slate-100);
+            border-bottom: 1px solid var(--color-slate-200);
+        }
+
+        th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-bottom: 1px solid var(--color-slate-200);
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem Styles */
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid var(--color-blue-500);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* Font Scaling */
+        h1 { font-size: clamp(1.5rem, 5vw, 3rem) !important; }
+        h2 { font-size: clamp(1.25rem, 4vw, 1.875rem) !important; }
+        h3 { font-size: clamp(1rem, 3vw, 1.5rem) !important; }
+        h4 { font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important; }
+        p { font-size: clamp(0.875rem, 2vw, 1rem) !important; }
+        body, .container-notes, .toc-nav { font-size: clamp(0.75rem, 1.5vw, 0.95rem); }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .main-wrapper { padding: 1rem 0.5rem !important; }
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+                width: 95% !important;
+            }
+            .math-block {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">General Chemistry Notes</h2>
+            <a class="navbar-back" href="chem.html">&larr; Back to Chemistry</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">CH 110 Topic 4 Notes</p>
+                <h1>Gases</h1>
+                <p class="description">
+                    Comprehensive notes on the properties of gases, gas laws, gas stoichiometry, Dalton's Law, the Kinetic Molecular Theory, effusion, diffusion, and real gas behavior.
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p class="toc-title">Table of Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-pressure">1. Pressure and Properties of Gases</a></li>
+                    <li><a href="#section-gas-laws">2. The Gas Laws</a></li>
+                    <li><a href="#section-stoichiometry">3. Gas Stoichiometry</a></li>
+                    <li><a href="#section-daltons-law">4. Dalton's Law of Partial Pressures</a></li>
+                    <li><a href="#section-kmt">5. Kinetic Molecular Theory (KMT)</a></li>
+                    <li><a href="#section-effusion">6. Effusion and Diffusion</a></li>
+                    <li><a href="#section-real-gases">7. Real Gases and Van der Waals Equation</a></li>
+                </ul>
+            </nav>
+
+            <section id="section-pressure" class="mb-12">
+                <h2>1. Pressure and Properties of Gases</h2>
+                <p>
+                    A gas is a substance that is normally in the gaseous state at room temperature and pressure (rtp). The term <b>vapour</b> refers to a gas formed by evaporation of a liquid or sublimation of a solid.
+                </p>
+
+                <h3>1.1 Properties of Gases</h3>
+                <ul class="simple-list">
+                    <li>Are readily compressible.</li>
+                    <li>Completely fill any container and as a result have a low density.</li>
+                    <li>Mix completely with any other gas.</li>
+                    <li>Exert pressure on their surroundings.</li>
+                </ul>
+                <p>
+                    Unlike condensed phases, gases occupy volumes that depend on pressure (P) and temperature (T). 
+                    <b>Standard temperature and pressure (STP)</b> refers to 0&deg;C (273.15 K) and 1 atm. 
+                    <b>Room temperature and pressure (RTP)</b> refers to 25&deg;C and 1 atm. 
+                    At STP, 1 mole of an ideal gas occupies 22.4 L.
+                </p>
+
+                <h3>1.2 Definition of Pressure and Units</h3>
+                <p>
+                    Pressure is defined as force per unit area. 
+                </p>
+                <div class="math-block">1 atm = 760 mm Hg = 760 Torr = 101325 Pa (or N/m&sup2;)</div>
+                <p>
+                    The pressure exerted by a column of fluid is calculated as:
+                </p>
+                <div class="math-block">P (in Pa) = h &times; d &times; g</div>
+                <p>
+                    Where <b>h</b> is column height, <b>d</b> is fluid density, and <b>g</b> is acceleration due to gravity. Manometers measure pressure differences, while barometers measure atmospheric pressure.
+                </p>
+            </section>
+
+            <section id="section-gas-laws" class="mb-12">
+                <h2>2. The Gas Laws</h2>
+                <p>
+                    When a gas obeys these laws, it behaves as an <b>ideal gas</b> or a <b>perfect gas</b>.
+                </p>
+
+                <h3>2.1 Boyle's Law</h3>
+                <p>
+                    The pressure of a fixed amount of gas is inversely proportional to its volume at constant temperature.
+                </p>
+                <div class="math-block">V &prop; 1/P &nbsp; &rArr; &nbsp; P<sub>1</sub>V<sub>1</sub> = P<sub>2</sub>V<sub>2</sub></div>
+
+                <h3>2.2 Charles' Law</h3>
+                <p>
+                    The volume of a fixed amount of gas at constant pressure is directly proportional to its absolute temperature in Kelvin.
+                </p>
+                <div class="math-block">V &prop; T &nbsp; &rArr; &nbsp; V<sub>1</sub>/T<sub>1</sub> = V<sub>2</sub>/T<sub>2</sub></div>
+
+                <h3>2.3 Gay-Lussac's Law</h3>
+                <p>
+                    Provided volume is constant, the pressure of a fixed amount of gas varies directly with temperature.
+                </p>
+                <div class="math-block">P &prop; T &nbsp; &rArr; &nbsp; P<sub>1</sub>/T<sub>1</sub> = P<sub>2</sub>/T<sub>2</sub></div>
+
+                <h3>2.4 Combined Gas Law</h3>
+                <p>
+                    A combination of Boyle's, Charles', and Gay-Lussac's Laws.
+                </p>
+                <div class="math-block">(P<sub>1</sub>V<sub>1</sub>) / T<sub>1</sub> = (P<sub>2</sub>V<sub>2</sub>) / T<sub>2</sub></div>
+
+                <h3>2.5 Avogadro's Law</h3>
+                <p>
+                    Provided temperature and pressure are fixed, equal volumes of all gases contain the same number of molecules.
+                </p>
+                <div class="math-block">V &prop; n &nbsp; &rArr; &nbsp; V<sub>1</sub>/n<sub>1</sub> = V<sub>2</sub>/n<sub>2</sub></div>
+
+                <h3>2.6 The Ideal Gas Law</h3>
+                <p>
+                    An ideal gas exhibits no attractive/repulsive forces and the volume of the molecules is negligibly small compared to the container.
+                </p>
+                <div class="math-block">PV = nRT</div>
+                <ul class="simple-list">
+                    <li><b>R = 0.08206 (L&middot;atm)/(K&middot;mol)</b> when V is in Litres and P is in atm.</li>
+                    <li><b>R = 8.314 J/(K&middot;mol)</b> when using SI units (m&sup3; and Pa).</li>
+                </ul>
+            </section>
+
+            <section id="section-stoichiometry" class="mb-12">
+                <h2>3. Gas Stoichiometry</h2>
+
+                <h3>3.1 Gas Density and Molar Mass</h3>
+                <p>
+                    Using the density formula <b>d = m / V</b> and the ideal gas law, we can derive equations to find the density or molar mass of a gas.
+                </p>
+                <div class="math-block">PM<sub>r</sub> = dRT</div>
+                <p>Where <b>M<sub>r</sub></b> is the molar mass of the gas.</p>
+
+                <div class="solution-box">
+                    <p class="solution-title">Example Problem: Density at STP</p>
+                    <p>A mole of gas at 450 K has a density of 1.41 g/dm&sup3; at 2.0 atm. What is the density at STP?</p>
+                    <div class="math-block">P<sub>1</sub> / (T<sub>1</sub> &middot; d<sub>1</sub>) = P<sub>2</sub> / (T<sub>2</sub> &middot; d<sub>2</sub>)
+                        
+d<sub>2</sub> = (T<sub>1</sub> &middot; d<sub>1</sub> &middot; P<sub>2</sub>) / (T<sub>2</sub> &middot; P<sub>1</sub>)
+d<sub>2</sub> = (450 &times; 1.41 &times; 1.0) / (273 &times; 2) = 1.16 g/dm&sup3;</div>
+                </div>
+            </section>
+
+            <section id="section-daltons-law" class="mb-12">
+                <h2>4. Dalton's Law of Partial Pressures</h2>
+                <p>
+                    For a mixture of gases in a container, the total pressure exerted is the sum of the pressures that each gas would exert if it were alone. It is the total number of moles of particles that is important, not the identity of the gas.
+                </p>
+                <div class="math-block">P<sub>total</sub> = P<sub>1</sub> + P<sub>2</sub> + P<sub>3</sub> + ...</div>
+
+                <h3>4.1 Mole Fraction (x)</h3>
+                <p>
+                    The ratio of the number of moles of a given component to the total number of moles in the mixture.
+                </p>
+                <div class="math-block">x<sub>1</sub> = n<sub>1</sub> / n<sub>total</sub> = P<sub>1</sub> / P<sub>total</sub></div>
+                <p>
+                    The sum of all mole fractions in a mixture equals 1.
+                </p>
+            </section>
+
+            <section id="section-kmt" class="mb-12">
+                <h2>5. Kinetic Molecular Theory (KMT) of Gases</h2>
+                <p>
+                    This theory models ideal gas behavior based on particles in motion.
+                </p>
+
+                <h3>5.1 Postulates of KMT</h3>
+                <ol class="numbered-list">
+                    <li>Particles are so small that the volume of the individual particles is assumed to be negligible (zero).</li>
+                    <li>Particles are in constant motion. Collisions with the walls cause the pressure exerted by the gas.</li>
+                    <li>Particles are assumed to exert no forces on each other (neither attract nor repel).</li>
+                    <li>The average kinetic energy of a collection of gas particles is directly proportional to the Kelvin temperature.</li>
+                </ol>
+
+                <p>
+                    These postulates perfectly explain all gas laws. For example, decreasing volume increases collision frequency, leading to higher pressure (Boyle's Law).
+                </p>
+            </section>
+
+            <section id="section-effusion" class="mb-12">
+                <h2>6. Effusion and Diffusion</h2>
+
+                <h3>6.1 Effusion (Graham's Law)</h3>
+                <p>
+                    Effusion is the movement of a gas through a small opening into a vacuum. Thomas Graham's Law states that the rate of effusion is inversely proportional to the square root of the molar mass of the gas particles. Lighter gases effuse faster.
+                </p>
+                <div class="math-block">Rate<sub>1</sub> / Rate<sub>2</sub> = &radic;(M<sub>2</sub> / M<sub>1</sub>) = &radic;(d<sub>2</sub> / d<sub>1</sub>)</div>
+
+                <h3>6.2 Diffusion</h3>
+                <p>
+                    Diffusion is the gradual mixing of molecules of one gas with molecules of another by virtue of their kinetic properties. It proceeds from a region of higher concentration to lower concentration.
+                </p>
+            </section>
+
+            <section id="section-real-gases" class="mb-12">
+                <h2>7. Real Gases and Deviations</h2>
+                <p>
+                    No gas exactly follows the ideal gas law. Real gases behave most ideally at <b>low pressures</b> and <b>high temperatures</b>. At high pressures, molecules are forced close together (volume is no longer negligible), and at low temperatures, intermolecular forces become significant.
+                </p>
+
+                <h3>7.1 The Van der Waals Equation</h3>
+                <p>
+                    Johannes van der Waals modified the ideal gas law to correct for finite molecular volume and attractive forces between molecules.
+                </p>
+                <div class="math-block">[ P<sub>obs</sub> + a(n/V)&sup2; ] &times; [ V - nb ] = nRT</div>
+                <ul class="simple-list">
+                    <li><b>Correction for Volume (V - nb):</b> Subtracts the volume occupied by the gas molecules themselves. <b>b</b> is a constant specific to the gas.</li>
+                    <li><b>Correction for Pressure [ P + a(n/V)&sup2; ]:</b> Accounts for attractive forces between gas particles, which reduces the observed pressure. <b>a</b> is a constant specific to the gas.</li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>

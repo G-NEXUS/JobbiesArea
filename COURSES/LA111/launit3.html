@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Making And Note Taking</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --color-teal-50: #f0fdfa;
+            --color-teal-100: #ccfbf1;
+            --color-teal-500: #14b8a6;
+            --color-teal-600: #0d9488;
+            --color-teal-700: #0f766e;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-slate-50);
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            font-size: 14px;
+        }
+
+        /* Responsive Typography */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* Container */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 768px) {
+            .container-notes {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container-notes {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-teal-500);
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h3 {
+                font-size: 1.75rem;
+            }
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h4 {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h4 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Header Section */
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-teal-600);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 0.875rem;
+            }
+        }
+
+        .description {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .description {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul.simple-list, 
+        ol.numbered-list {
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            ul.simple-list, 
+            ol.numbered-list {
+                margin-left: 1.5rem;
+            }
+        }
+
+        ul.simple-list {
+            list-style: disc;
+        }
+
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        li ul.simple-list,
+        li ol {
+            margin-top: 0.5rem;
+        }
+
+        /* Key Terms */
+        .key-term {
+            color: var(--color-teal-700);
+            font-weight: 600;
+        }
+
+        /* Lecture Script Block */
+        .lecture-script {
+            background-color: var(--color-slate-50);
+            border-left: 4px solid var(--color-teal-500);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+            color: var(--color-gray-800);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        @media (min-width: 768px) {
+            .lecture-script {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        /* Cornell Table */
+        .cornell-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table {
+                font-size: 0.95rem;
+            }
+        }
+
+        .cornell-table th, 
+        .cornell-table td {
+            border: 1px solid var(--color-slate-300);
+            padding: 0.625rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table th, 
+            .cornell-table td {
+                padding: 0.75rem;
+            }
+        }
+
+        .cornell-table th {
+            background-color: var(--color-teal-500);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table th {
+                font-size: 0.875rem;
+            }
+        }
+
+        .cue-column {
+            width: 35%;
+            font-weight: 600;
+            background-color: var(--color-teal-50);
+        }
+
+        @media (min-width: 768px) {
+            .cue-column {
+                width: 30%;
+            }
+        }
+
+        .note-area {
+            width: 65%;
+        }
+
+        @media (min-width: 768px) {
+            .note-area {
+                width: 70%;
+            }
+        }
+
+        /* Summary Block */
+        .summary-block {
+            background-color: var(--color-teal-100);
+            border-top: 3px solid var(--color-teal-600);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .summary-block h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-block p {
+            margin: 0;
+            color: var(--color-gray-800);
+        }
+
+        /* Back Button */
+        .zen {
+            display: inline-block;
+            background-color: rgb(11, 205, 11);
+            color: whitesmoke;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.625rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .zen {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.875rem;
+            }
+        }
+
+        .zen:hover {
+            background-color: rgb(8, 154, 8);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .mt-8 {
+                margin-top: 2.5rem;
+            }
+        }
+
+        /* Strong/Bold Text */
+        strong, b {
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+
+        /* Italic Text */
+        i, em {
+            font-style: italic;
+        }
+
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            background-color: var(--color-slate-100);
+            border: 2px dashed var(--color-slate-300);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--color-gray-600);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-placeholder {
+                padding: 2rem;
+            }
+        }
+
+        /* Custom Outline Lists */
+        ul[style*="list-style-type: none"] {
+            padding-left: 0;
+        }
+
+        ul[style*="list-style-type: none"] li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Responsive Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Note Making, Note Taking, and Active Skills</h2>
+            <a class="navbar-back" href="la111.html">← Back to LA111</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <!-- Title and Header -->
+            <header>
+                <p class="subtitle">Guide to Writing Notes</p>
+                <h1>Note Making, Note Taking, and Active Skills</h1>
+                <p class="description">
+                    Mastering the art of capturing and processing information efficiently is essential for academic and professional success.
+                </p>
+            </header>
+
+            <!-- Section 1: Note Taking vs. Note Making -->
+            <section id="section-notemaking">
+                <h2>1. Note Taking vs. Note Making (Theory)</h2>
+
+                <p>
+                    While often used interchangeably, these two processes serve distinct purposes in learning and retention.
+                </p>
+
+                <h3>1.1 Note Taking (Passive)</h3>
+                <p>
+                    This is the <span class="key-term">immediate recording</span> of information as it is delivered (e.g., during a lecture or while reading a book for the first time).
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Goal:</strong> To capture the main ideas and details quickly.</li>
+                    <li><strong>Action:</strong> Transcribing, abbreviating, or summarizing external content.</li>
+                </ul>
+
+                <h3>1.2 Note Making (Active)</h3>
+                <p>
+                    This is the <span class="key-term">processing and restructuring</span> of information after it has been taken down. It involves linking new ideas to existing knowledge.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Goal:</strong> To achieve deeper understanding and memory retention.</li>
+                    <li><strong>Action:</strong> Adding personal comments, cross-references, interpretations, or creating summaries.</li>
+                </ul>
+            </section>
+            
+            <!-- Section 2: Note Format Methods (Theory) -->
+            <section id="section-format">
+                <h2>2. Note Format Methods (Theory)</h2>
+                <p>
+                    Choosing the right format can optimize your notes for review and study.
+                </p>
+
+                <h3>2.1 The Cornell Method</h3>
+                <p>
+                    This is a highly structured format that divides the page into four distinct sections.
+                </p>
+                <div class="image-placeholder">
+                    [Image of Cornell Note Taking Method]
+                </div>
+                <ul class="simple-list">
+                    <li><strong>Cue Column (Left):</strong> Used for keywords, questions, prompts, and memory cues.</li>
+                    <li><strong>Note-Taking Area (Main Right):</strong> Used for taking notes during the lecture or reading (facts, definitions, dates).</li>
+                    <li><strong>Summary Area (Bottom):</strong> Used after the fact to summarize the entire page in a few sentences.</li>
+                </ul>
+
+                <h3>2.2 Outlining Method</h3>
+                <p>
+                    This method uses headings and subheadings (Roman numerals, capital letters, Arabic numerals) to show the hierarchical structure of the information.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>When to Use:</strong> When the lecture or text is well-organized and follows a logical sequence.</li>
+                    <li><strong>Benefit:</strong> Clearly shows the relationship between main points and supporting details.</li>
+                </ul>
+                
+                <h3>2.3 Mapping/Mind Map Method</h3>
+                <p>
+                    A visual method that organizes information spatially. The main topic is centered, and related ideas branch outward, allowing you to see connections quickly.
+                </p>
+                <div class="image-placeholder">
+                    [Image of Mind Map Note Taking]
+                </div>
+                <ul class="simple-list">
+                    <li><strong>When to Use:</strong> For brainstorming, relating concepts, or when the content is non-linear.</li>
+                    <li><strong>Benefit:</strong> Excellent for visual learners and for quick review of large topics.</li>
+                </ul>
+            </section>
+            
+            <!-- Section 3: Note Making and Taking: Practical Examples -->
+            <section id="section-examples">
+                <h2>3. Note Making and Taking: Practical Examples</h2>
+                <p>
+                    These examples demonstrate how a short lecture can be captured and organized using the primary note formats.
+                </p>
+
+                <!-- Lecture Script -->
+                <section id="section-scenario">
+                    <h3>3.1 Scenario: Sample Lecture Content</h3>
+                    <h4>Topic: Psychological Barriers to Communication</h4>
+                    <div class="lecture-script">
+                        "Today we'll focus on <strong>Psychological Barriers</strong>. These are internal states, like stress or distraction, that prevent effective listening. Two common types are <strong>Lack of Attention</strong> and <strong>Premature Evaluation</strong>. Lack of Attention occurs when the receiver's mind wanders, perhaps due to personal stress or simply being bored with the subject. Premature Evaluation is when the receiver judges the speaker or the message before it's fully delivered. For instance, if you dislike the speaker's accent, you might stop listening to the content entirely. Finally, <strong>Emotional Disconnect</strong> is critical. If the sender is speaking calmly but the receiver is highly angry or emotional, the message will be distorted through the filter of that intense feeling. Remember, these barriers are all about the internal state of the mind."
+                    </div>
+                </section>
+                
+                <!-- Cornell Method Example -->
+                <section id="section-cornell-ex" class="mt-8">
+                    <h3>3.2 The Cornell Method in Practice</h3>
+                    <p>
+                        This format captures the lecture content (Note Taking) and provides a space for synthesis (Note Making - the Summary).
+                    </p>
+                    <table class="cornell-table">
+                        <thead>
+                            <tr>
+                                <th class="cue-column">Cue Column (Keywords & Questions)</th>
+                                <th class="note-area">Note-Taking Area (Lecture Content)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="cue-column">
+                                    <p><strong>Psychological Barriers (PB)?</strong></p>
+                                    <p>2 Main Types of PB?</p>
+                                    <p>Define Premature Evaluation (PE).</p>
+                                    <p>Emotional Disconnect?</p>
+                                    <p><strong>Key Takeaway?</strong></p>
+                                    <p><em>Self-Check question for study:</em> How can a sender overcome receiver's emotional disconnect?</p>
+                                </td>
+                                <td class="note-area">
+                                    <ul class="simple-list">
+                                        <li>PB are <strong>internal states</strong> (stress, distraction) that interfere w/ effective listening.</li>
+                                        <li>Two key types: <strong>1) Lack of Attention</strong> & <strong>2) Premature Evaluation.</strong></li>
+                                        <li>Lack of Attention caused by mind wandering (boredom, personal stress). Stops <em>intake</em> of message.</li>
+                                        <li>PE is <strong>judging speaker/message</strong> <em>before</em> they finish. E.g., disliking an accent and tuning out content.</li>
+                                        <li><strong>Emotional Disconnect:</strong> Message distorted because receiver's intense feeling (anger, etc.) acts as a filter.</li>
+                                        <li>PBs are focused entirely on the <strong>internal state of the receiver's mind</strong>.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="summary-block">
+                        <h4>SUMMARY (Note Making - Done AFTER the lecture/reading)</h4>
+                        <p>
+                            Psychological Barriers are internal mental states (stress, boredom, strong emotion) that prevent a receiver from accurately processing a message. The three main PBs discussed are Lack of Attention, Premature Evaluation, and Emotional Disconnect, all highlighting that the receiver's mental state is key to effective communication.
+                        </p>
+                    </div>
+                </section>
+                
+                <!-- Outlining Method Example -->
+                <section id="section-outlining-ex" class="mt-8">
+                    <h3>3.3 The Outlining Method in Practice</h3>
+
+                    <h4>Topic: Psychological Barriers to Communication</h4>
+
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li>
+                            <strong>I. Definition of Psychological Barriers (PB)</strong>
+                            <ul style="list-style-type: none; padding-left: 20px;">
+                                <li>&bull; A. Internal states (stress, distraction)</li>
+                                <li>&bull; B. Primary effect is preventing effective listening.</li>
+                                <li>&bull; C. Focus on the receiver's internal state.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>II. Two Common Types of PB</strong>
+                            <ul style="list-style-type: none; padding-left: 20px;">
+                                <li>&bull; A. <strong>Lack of Attention</strong>
+                                    <ul style="list-style-type: decimal; padding-left: 30px;">
+                                        <li>Cause: Receiver's mind wanders (stress, boredom).</li>
+                                        <li>Result: Message intake stops.</li>
+                                    </ul>
+                                </li>
+                                <li>&bull; B. <strong>Premature Evaluation</strong>
+                                    <ul style="list-style-type: decimal; padding-left: 30px;">
+                                        <li>Definition: Judging the message or speaker before completion.</li>
+                                        <li>Example: Disliking a speaker's voice and ignoring their facts.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>III. Emotional Disconnect (Critical Barrier)</strong>
+                            <ul style="list-style-type: none; padding-left: 20px;">
+                                <li>&bull; A. Occurs when receiver's intense emotion (e.g., anger) filters or distorts the message.</li>
+                                <li>&bull; B. Message received is not the same as the message sent.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Mapping/Mind Map Method Example -->
+                <section id="section-mapping-ex" class="mt-8">
+                    <h3>3.4 The Mapping/Mind Map Method in Practice</h3>
+                    <p>
+                        This method emphasizes relationships and is often used visually during the Note Making stage to connect ideas.
+                    </p>
+                    <div class="image-placeholder">
+                        [Image of Mind Map for Communication Barriers]
+                    </div>
+
+                    <ol class="numbered-list">
+                        <li><strong>Start in the Center:</strong> Write the central idea: <strong>Psychological Barriers</strong></li>
+                        <li><strong>Draw Main Branches (Categories):</strong> Draw four main branches radiating from the center: <strong>Definition</strong>, <strong>Lack of Attention</strong>, <strong>Premature Evaluation</strong>, and <strong>Emotional Disconnect</strong>.</li>
+                        <li><strong>Add Sub-Branches (Details):</strong>
+                            <ul class="simple-list">
+                                <li><strong>Definition branch:</strong> Sub-branches for "Internal States," "Stress," and "Prevents Listening."</li>
+                                <li><strong>Lack of Attention branch:</strong> Sub-branches for "Mind Wandering," "Boredom," and "Personal Stress."</li>
+                                <li><strong>Premature Evaluation branch:</strong> Sub-branches for "Judging Speaker," "Judging Message," and "Stops Content Intake."</li>
+                                <li><strong>Emotional Disconnect branch:</strong> Sub-branches for "Intense Feeling (Anger)," and "Distorted Message."</li>
+                            </ul>
+                        </li>
+                        <li><strong>Use Color & Images:</strong> (Note Making step) Use different colored pens for each main branch and draw small icons (e.g., a frowning face for 'Premature Evaluation') to help memory recall.</li>
+                    </ol>
+                </section>
+            </section>
+            
+            <!-- Section 4: Guides to Writing Notes -->
+            <section id="section-writing">
+                <h2>4. Guides to Writing Notes (Structural Cues)</h2>
+                <p>
+                    Effective notes are built around the structure of the source material. Recognizing key structural elements improves comprehension and makes review easier.
+                </p>
+                
+                <h3>4.1 Thesis Statements</h3>
+                <p>
+                    In academic writing, the <span class="key-term">thesis statement</span> is the core argument or purpose of the entire essay or report.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Function:</strong> It controls the subject matter of the entire document.</li>
+                    <li><strong>Note-taking Tip:</strong> Identify and write down the thesis statement (usually in the introduction) as it tells you what the entire text will attempt to prove or explain.</li>
+                </ul>
+
+                <h3>4.2 Topic Sentences</h3>
+                <p>
+                    The <span class="key-term">topic sentence</span> is the main idea of a single paragraph.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Function:</strong> It summarizes the content of its paragraph and relates back to the thesis statement.</li>
+                    <li><strong>Note-taking Tip:</strong> Most of your notes should be focused on the topic sentence and the three or four supporting points that follow it in the paragraph.</li>
+                </ul>
+
+                <h3>4.3 Transitional Markers</h3>
+                <p>
+                    <span class="key-term">Transitional markers</span> (or linkers) are words or phrases that show the relationship between ideas, paragraphs, or sections.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Examples:</strong> <em>However, In addition, For example, Consequently, Similarly, Finally.</em></li>
+                    <li><strong>Function in Notes:</strong> They act as signposts. When you see a marker like "However," you know a contrast or counter-argument is coming. This helps you predict the flow of the information and structure your notes logically.</li>
+                </ul>
+            </section>
+
+            <!-- Section 5: Active Listening Skills -->
+            <section id="section-listening">
+                <h2>5. Active Listening Skills</h2>
+                <p>
+                    Active listening is a communication skill where the listener fully concentrates, understands, responds, and remembers what is being said, both verbally and non-verbally.
+                </p>
+                
+                <h3>5.1 Techniques for Active Listening</h3>
+                <ol class="numbered-list">
+                    <li><strong>Pay Attention:</strong> Look at the speaker, put aside distracting thoughts, and avoid mentally preparing your reply.</li>
+                    <li><strong>Show that You're Listening:</strong> Use non-verbal cues like nodding, making eye contact, and having an open posture.</li>
+                    <li><strong>Provide Feedback (Verbal):</strong> Use short verbal affirmations like "I see," "Yes," or "Mh-mm." Paraphrase the speaker's main points back to them to confirm understanding: "So, what you are saying is..."</li>
+                    <li><strong>Defer Judgment:</strong> Allow the speaker to finish their point without interruption or premature dismissal of the idea.</li>
+                    <li><strong>Respond Appropriately:</strong> This involves answering questions clearly, offering suggestions, and remembering key information for future discussion.</li>
+                </ol>
+            </section>
+            
+            <!-- Section 6: Active Reading Skills -->
+            <section id="section-reading">
+                <h2>6. Active Reading Skills</h2>
+                <p>
+                    Active reading is more than just passing your eyes over the text; it involves interacting with the material to improve comprehension and retention.
+                </p>
+                
+                <h3>6.1 The SQ3R Method</h3>
+                <p>
+                    SQ3R is a popular, five-step method for active reading and studying:
+                </p>
+                <ol class="numbered-list">
+                    <li><strong>Survey (S):</strong> Skim the chapter, look at the headings, subheadings, captions, introduction, and summary to get an overview.</li>
+                    <li><strong>Question (Q):</strong> Turn the headings and subheadings into questions you hope to answer as you read (e.g., if the title is "Types of Barriers," ask: "What are the types of barriers?").</li>
+                    <li><strong>Read (R1):</strong> Read the text actively, seeking the answers to your questions. Do not stop to take detailed notes yet.</li>
+                    <li><strong>Recite (R2):</strong> After reading a section, look away from the text and recite (out loud or mentally) the main ideas and answers to your questions in your own words.</li>
+                    <li><strong>Review (R3):</strong> Review your notes and the text immediately after finishing and again periodically to solidify the information in your long-term memory.</li>
+                </ol>
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOBBIESAREA</title>
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --color-teal-50: #f0fdfa;
+            --color-teal-100: #ccfbf1;
+            --color-teal-500: #14b8a6;
+            --color-teal-600: #0d9488;
+            --color-teal-700: #0f766e;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-amber-50: #fffbeb;
+            --color-amber-300: #fcd34d;
+            --color-amber-700: #b45309;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-slate-50);
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            font-size: 14px;
+        }
+
+        /* Responsive Typography */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* Container */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 768px) {
+            .container-notes {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container-notes {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-teal-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h3 {
+                font-size: 1.75rem;
+            }
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h4 {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h4 {
+                font-size: 1.25rem;
+            }
+        }
+
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gray-700);
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Header Section */
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-teal-600);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 0.875rem;
+            }
+        }
+
+        .description {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .description {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul.simple-list, 
+        ol.numbered-list {
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            ul.simple-list, 
+            ol.numbered-list {
+                margin-left: 1.5rem;
+            }
+        }
+
+        ul.simple-list {
+            list-style: disc;
+        }
+
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        li ul.simple-list,
+        li ol {
+            margin-top: 0.5rem;
+        }
+
+        /* Key Terms */
+        .key-term {
+            color: var(--color-teal-700);
+            font-weight: 600;
+        }
+
+        /* Example Blocks */
+        .example-block {
+            background-color: var(--color-teal-50);
+            border-left: 4px solid var(--color-teal-500);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+            color: var(--color-gray-800);
+            line-height: 1.7;
+        }
+
+        @media (min-width: 768px) {
+            .example-block {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        .example-block p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-block p:first-child {
+            margin-top: 0;
+        }
+
+        .example-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-weight: 700;
+            color: var(--color-teal-600);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .label {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Important Rule Box */
+        .important-rule {
+            background-color: var(--color-amber-50);
+            border: 1px solid var(--color-amber-300);
+            color: var(--color-amber-700);
+            padding: 0.75rem;
+            margin-top: 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .important-rule {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Navigation Buttons */
+        .zen {
+            display: inline-block;
+            background-color: var(--color-teal-600);
+            padding: 0.625rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out;
+            font-size: 0.875rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .zen {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.875rem;
+            }
+        }
+
+        .zen:hover {
+            background-color: var(--color-teal-700);
+        }
+
+        .zen-disabled {
+            background-color: var(--color-gray-600);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Table of Contents */
+        .toc-nav {
+            margin-bottom: 2rem;
+            background-color: var(--color-teal-50);
+            border: 1px solid var(--color-teal-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            .toc-nav {
+                margin-bottom: 2.5rem;
+                padding: 1.25rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        .toc-title {
+            font-weight: 700;
+            color: var(--color-teal-700);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            border-bottom: 1px dashed var(--color-teal-200);
+            padding-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .toc-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+            display: block;
+            padding-left: 0.75rem;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            color: var(--color-teal-600);
+            font-weight: 600;
+            border-left: 2px solid var(--color-teal-500);
+        }
+
+        .unit-heading {
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            padding-left: 0;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .unit-heading {
+                font-size: 1rem;
+            }
+        }
+
+        .unit-heading:first-child {
+            margin-top: 0;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /* Strong/Bold Text */
+        strong, b {
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+
+        /* Italic Text */
+        i, em {
+            font-style: italic;
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background-color: var(--color-slate-100);
+            border: 2px dashed var(--color-slate-300);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--color-gray-600);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-placeholder {
+                padding: 2rem;
+            }
+        }
+
+        /* Responsive Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Clear float utility */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Technical Writing: Definitions & Descriptions</h2>
+            <a class="navbar-back" href="la111.html">← Back to LA111</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+            
+            <!-- Title and Header -->
+            <header>
+                <p class="subtitle">Unit 4 & 5 Combined</p>
+                <h1>Technical Writing: Definitions & Descriptions</h1>
+                <p class="description">
+                    A consolidated guide to the foundational skills of technical communication: defining terms precisely and describing mechanisms and processes objectively.
+                </p>
+            </header>
+            
+            <!-- Table of Contents -->
+            <nav class="toc-nav">
+                <p class="toc-title">Table of Contents</p>
+                <ul class="toc-list">
+                    <li class="unit-heading">UNIT 4: Definitions</li>
+                    <li><a href="#u4-definitions">1. Definitions (The Core Purpose)</a></li>
+                    <li><a href="#u4-when-what">2. When and What to Define</a></li>
+                    <li><a href="#u4-how">3. How to Define (The Logical Pattern)</a></li>
+                    <li><a href="#u4-forms">4. Forms of Definitions</a></li>
+                    
+                    <li class="unit-heading">UNIT 5: Descriptions</li>
+                    <li><a href="#u5-observation">5. Accurate Writing Based on Observation</a></li>
+                    <li><a href="#u5-detailed">6. What Constitutes a Detailed Description?</a></li>
+                    <li><a href="#u5-organization">7. Organizing and Presenting a Technical Description</a></li>
+                </ul>
+            </nav>
+
+            <!-- UNIT 4: DEFINITIONS -->
+            <h2 id="u4-unit-title">UNIT 4: Technical Writing (Definitions)</h2>
+
+            <!-- Section 1: Definitions -->
+            <section id="u4-definitions">
+                <h3>1. Definitions (The Core Purpose)</h3>
+
+                <p>
+                    In technical communication, a definition is more than just a dictionary entry; it is a precise statement that specifies the meaning, limits, and function of a term for a specific audience.
+                </p>
+
+                <h4>1.1 Why Define Terms?</h4>
+                <p>
+                    Technical documents must be unambiguous. Definitions ensure:
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Clarity:</strong> Eliminates confusion about specialized concepts.</li>
+                    <li><strong>Accuracy:</strong> Establishes a common, precise meaning for experts and laypersons alike.</li>
+                    <li><strong>Consistency:</strong> Ensures the term is used in the same way throughout the document and organization.</li>
+                    <li><strong>Reader Accessibility:</strong> Allows the non-expert reader to follow complex instructions or arguments.</li>
+                </ul>
+            </section>
+            
+            <!-- Section 2: When and What to Define -->
+            <section id="u4-when-what">
+                <h3>2. When and What to Define</h3>
+                
+                <p class="important-rule">
+                    The golden rule of technical writing: Define terms based on your audience and the context of your document.
+                </p>
+
+                <h4>2.1 When to Define</h4>
+                <ul class="simple-list">
+                    <li><strong>First Appearance:</strong> Always define a technical term the first time it is used in the document.</li>
+                    <li><strong>Ambiguity:</strong> If a term has multiple meanings (even outside the technical field), define the specific meaning you are using.</li>
+                    <li><strong>New/Unfamiliar Terms:</strong> When introducing novel concepts, abbreviations (acronyms), or jargon that the target audience may not know.</li>
+                    <li><strong>Specialized Usage:</strong> If you are using a common word (e.g., "power," "load," "system") in a highly specific, technical way.</li>
+                </ul>
+
+                <h4>2.2 What to Define</h4>
+                <ul class="simple-list">
+                    <li><strong>Jargon:</strong> Highly specialized language specific to your field (e.g., <span class="key-term">Polymorphism</span> in programming).</li>
+                    <li><strong>Acronyms/Abbreviations:</strong> Always provide the full term before the abbreviation in parentheses (e.g., <span class="key-term">Central Processing Unit (CPU)</span>).</li>
+                    <li><strong>Measurements:</strong> When using non-standard or unfamiliar units of measure.</li>
+                    <li><strong>Proprietary Terms:</strong> Product names or internal system names unique to your organization.</li>
+                </ul>
+            </section>
+            
+            <!-- Section 3: How to Define -->
+            <section id="u4-how">
+                <h3>3. How to Define (The Logical Pattern)</h3>
+                <p>
+                    The classical method of definition is the most common and effective way to ensure clarity. It follows a simple, three-part structure.
+                </p>
+                <div class="image-placeholder">
+                    [Image of the Three-Part Structure of Definition]
+                </div>
+
+                <h4>3.1 The Three-Part Structure</h4>
+                <p>
+                    A strong definition consists of the Term, the Class, and the Differentiating Characteristics:
+                </p>
+                <ol class="numbered-list">
+                    <li>
+                        <strong>Term:</strong> The word or phrase being defined.
+                    </li>
+                    <li>
+                        <strong>Class (or Group):</strong> The broad category or group the term belongs to.
+                    </li>
+                    <li>
+                        <strong>Distinguishing Characteristics:</strong> The specific qualities, limits, or features that make this term unique within its class.
+                    </li>
+                </ol>
+                
+                <div class="example-block">
+                    <span class="label">Example Definition Construction (Term: Inductance)</span>
+                    <p>
+                        <strong>Term:</strong> Inductance <br>
+                        <strong>Class:</strong> is a property of an electrical conductor <br>
+                        <strong>Distinguishing Characteristics:</strong> that opposes a change in the current flow through it.
+                    </p>
+                    <p><strong>Final Sentence:</strong> Inductance is a property of an electrical conductor that opposes a change in the current flow through it.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: Forms of Definitions -->
+            <section id="u4-forms">
+                <h3>4. Forms of Definitions</h3>
+                <p>
+                    Definitions can be presented in short, inline formats, or expanded into long, detailed explanations, depending on the audience's needs.
+                </p>
+
+                <h4>4.1 Parenthetical Definition (Briefest Form)</h4>
+                <p>
+                    This is the shortest form, placing a synonym or brief phrase within parentheses immediately after the term's first use. Best for simple terms or non-essential jargon.
+                </p>
+                <div class="example-block">
+                    <p>The engineer used a <span class="key-term">potentiometer</span> (variable resistor) to tune the circuit.</p>
+                </div>
+                
+                <h4>4.2 Sentence Definition (Standard Form)</h4>
+                <p>
+                    This is the three-part classical structure (Term, Class, Characteristics) presented as a single sentence. Best for glossaries, introductions, or when first introducing a core concept.
+                </p>
+                <div class="example-block">
+                    <p>A <span class="key-term">firewall</span> is a network security system (Class) that monitors and controls incoming and outgoing network traffic based on predetermined security rules (Characteristics).</p>
+                </div>
+                
+                <h4>4.3 Extended Definition (Most Detailed Form)</h4>
+                <p>
+                    This uses the sentence definition as a starting point, then expands it into a full paragraph or multiple paragraphs using supplementary methods to ensure complete understanding. Best for complex, foundational concepts that require deep understanding.
+                </p>
+                <h5>Supplementary Methods Used in Extended Definitions:</h5>
+                <ul class="simple-list">
+                    <li><strong>Analysis (Principle of Operation):</strong> Explaining how it works.</li>
+                    <li><strong>Comparison/Contrast:</strong> Showing how it is similar or different from related terms.</li>
+                    <li><strong>Etymology:</strong> The origin of the word.</li>
+                    <li><strong>Examples/Illustrations:</strong> Providing scenarios or use cases.</li>
+                    <li><strong>Negation:</strong> Explaining what the term is <em>not</em>.</li>
+                </ul>
+                <div class="example-block">
+                    <span class="label">Extended Definition Example (Paraphrased)</span>
+                    <p>
+                        <span class="key-term">Bandwidth</span> is a measure of the maximum rate of data transfer across a given path (Sentence Definition). It is primarily measured in bits per second (bps) and determines the capacity of a communication link. This term is often confused with <strong>speed</strong>; however, speed refers to latency, while bandwidth refers to volume (Comparison/Contrast). For example, a water pipe with a large diameter (high bandwidth) can move a large volume of water, even if it moves slowly (Example).
+                    </p>
+                </div>
+            </section>
+            
+            <!-- UNIT 5: DESCRIPTIONS -->
+            <h2 id="u5-unit-title">UNIT 5: Technical Writing (Descriptions)</h2>
+
+            <!-- Section 5: Accurate Information Writing Based on Observation -->
+            <section id="u5-observation">
+                <h3>5. Accurate Information Writing Based on Observation</h3>
+
+                <p>
+                    Technical descriptions rely fundamentally on objective, verifiable facts gathered through careful observation, rather than subjective interpretation or opinion.
+                </p>
+
+                <h4>5.1 Principle of Objectivity</h4>
+                <p>
+                    Technical writing must be objective, meaning it focuses solely on observable, measurable reality.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Fact, not Opinion:</strong> Describe what <em>is</em>, not what you <em>feel</em> or <em>think</em>.</li>
+                    <li><strong>Measurable Data:</strong> Use specific quantities, dimensions, temperatures, and tolerances. (e.g., "The fan is 10 cm in diameter," not "The fan is large.")</li>
+                    <li><strong>Eliminate Bias:</strong> Avoid emotionally loaded words or judgmental language.</li>
+                </ul>
+                
+                <div class="example-block">
+                    <span class="label">Objective vs. Subjective</span>
+                    <p>
+                        <strong>Subjective:</strong> "The sensor has a neat little housing and feels rugged." <br>
+                        <strong>Objective:</strong> "The sensor is encased in injection-molded ABS plastic (ASTM D4549), measuring 3.0 × 1.5 × 0.5 cm, with a Shore D hardness of 80."
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Section 6: What Constitutes a Detailed Description? -->
+            <section id="u5-detailed">
+                <h3>6. What Constitutes a Detailed Description?</h3>
+                
+                <p>
+                    A description is considered detailed when it provides enough information for the audience to fully visualize, understand the function of, or even replicate the mechanism or process.
+                </p>
+
+                <h4>6.1 Key Elements of Detail</h4>
+                <ul class="simple-list">
+                    <li><strong>Nomenclature:</strong> Use the precise, standard names for all parts.</li>
+                    <li><strong>Physical Properties:</strong> Detail the material, color, texture, weight, shape, and dimensions.</li>
+                    <li><strong>Location and Spatial Relationship:</strong> Clearly state where parts are located relative to each other (e.g., "The main gear meshes with the secondary pinion, located 5 mm above the base plate").</li>
+                    <li><strong>Function/Purpose:</strong> Explain the specific job each part performs within the system.</li>
+                </ul>
+                
+                <div class="example-block">
+                    <span class="label">Checklist for Component Description</span>
+                    <p>
+                        Does the description address: <strong>What</strong> is it? <strong>What</strong> is it made of? <strong>What</strong> does it look like (shape/size)? <strong>Where</strong> is it located? <strong>What</strong> does it do?
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Section 7: Organizing and Presenting a Technical Description -->
+            <section id="u5-organization">
+                <h3>7. Organizing and Presenting a Technical Description</h3>
+                <p>
+                    A well-organized description ensures the reader can mentally assemble the parts or follow the steps logically.
+                </p>
+                
+                <h4>7.1 Standard Organizational Structure</h4>
+                
+                <h5>a. Introduction</h5>
+                <p>
+                    States the definition, overall purpose, and function of the mechanism or process being described. It also lists the main parts.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Definition:</strong> (Using Unit 4's sentence definition format) What is it?</li>
+                    <li><strong>Function:</strong> What does it accomplish?</li>
+                    <li><strong>Partition:</strong> A preview list of the main components or stages that will be described.</li>
+                </ul>
+                
+                <h5>b. Body (Detailed Description)</h5>
+                <p>
+                    This section describes the components, parts, or stages in a systematic order. The most effective ways to order the body are:
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Spatial Order:</strong> Describing parts from top to bottom, left to right, outside to inside, or front to back. (Best for mechanisms/objects)</li>
+                    <li><strong>Functional Order:</strong> Describing parts in the sequence they operate. (Best for systems or processes)</li>
+                    <li><strong>Chronological Order:</strong> Describing steps in the order they occur. (Best for processes)</li>
+                </ul>
+                
+                <h5>c. Conclusion</h5>
+                <p>
+                    Summarizes the main function and perhaps the significance or application of the mechanism/process.
+                </p>
+                
+                <h4>7.2 Use of Diagrams and Visual Aids</h4>
+                <p>
+                    Diagrams are essential in technical descriptions as they provide visual context that text alone cannot match.
+                </p>
+                <div class="image-placeholder">
+                    [Image of a schematic diagram for a simple circuit]
+                </div>
+                <ul class="simple-list">
+                    <li><strong>Clarity and Labeling:</strong> Every diagram must have clear, accurate labels corresponding to the names used in the text.</li>
+                    <li><strong>Placement:</strong> Place diagrams as close as possible to the text that references them.</li>
+                    <li><strong>Referencing:</strong> Always reference the figure in the text (e.g., "As shown in Figure 3.1, the output signal is routed through the operational amplifier...").</li>
+                    <li><strong>Types:</strong> Use diagrams like exploded views (for assembly), flowcharts (for processes), or schematics (for electrical systems).</li>
+                </ul>
+                <div class="image-placeholder">
+                    [Image of an exploded view diagram]
+                </div>
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>

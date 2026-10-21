@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>PH 110: Chapter 2 - Scalars and Vectors (Detailed)</title>
+    
+    <style>
+        /* Define color variables for consistency */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+        
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) {
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem/Box Styles */
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        /* Step List */
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        /* Math Blocks */
+        .math-display, .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: var(--color-blue-800);
+            background-color: var(--color-blue-50);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .math-block {
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+        }
+
+        .zen{
+            background-color: var(--color-blue-600);
+            padding: 8px 24px;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .zen:hover {
+            background-color: var(--color-blue-700);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .image-caption {
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body, .container-notes, .toc-nav {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            .toc-nav {
+                padding: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .toc-list {
+                gap: 0.125rem 0.5rem !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Step list responsive */
+        @media (max-width: 480px) {
+            .step-list {
+                padding-left: 0 !important;
+            }
+            
+            .step-list li {
+                margin-bottom: 0.75rem !important;
+                padding-left: 1.75rem !important;
+            }
+            
+            .step-list li::before {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Scalars and Vectors (PH 110)</h2>
+            <a class="navbar-back" href="physics.html">← Back to Physics</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">PH 110 - Lecture Notes</p>
+                <h1>
+                    **Chapter 2: Scalars and Vectors**
+                </h1>
+                <p class="description">
+                    Physical quantities in physics are classified as either **scalars** (which only have size) or **vectors** (which require both size and direction). This chapter details the properties and mathematical operations of these quantities.
+                </p>
+            </header>
+
+            <nav class="toc-nav">
+                <p class="toc-title">Chapter Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-scalar">1. Scalar Quantities</a></li>
+                    <li><a href="#section-vector">2. Vector Quantities</a></li>
+                    <li><a href="#section-rep">3. Representation and Definitions</a></li>
+                    <li><a href="#section-add">4. Vector Addition (Geometric & Analytical)</a></li>
+                    <li><a href="#section-mult">5. Multiplying Vectors</a></li>
+                </ul>
+            </nav>
+
+            <section id="section-scalar" class="mb-12">
+                <h2>1. **Scalar Quantities**</h2>
+                <p>
+                    **Scalar quantities** are those completely described by a **magnitude** (a number and a unit) and possess **no directional dependence**.
+                </p>
+                <p>
+                    **Clarification:** Scalars follow the rules of ordinary algebra. If you combine two scalar quantities, you just add or subtract their magnitudes. For example, 1 hour plus 2 hours equals 3 hours, always.
+                </p>
+                <div class="solution-box">
+                    <p class="solution-title">Examples of Scalars</p>
+                    <ul class="simple-list">
+                        <li>**Mass** (e.g., 5 kg)</li>
+                        <li>**Time** (e.g., 30 seconds)</li>
+                        <li>**Distance** (e.g., 10 meters)</li>
+                        <li>**Temperature**, **Speed**, **Energy**, **Electric Current**</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <hr>
+
+            <section id="section-vector" class="mb-12">
+                <h2>2. **Vector Quantities**</h2>
+                <p>
+                    **Vector quantities** are defined by both a **magnitude** and a **direction**.
+                </p>
+                <p>
+                    **Clarification:** Because direction matters, vectors must be added and subtracted using special geometric and trigonometric rules (Vector Algebra). For example, a 10 N force plus another 10 N force can result in anything from 0 N to 20 N, depending on the angle between them.
+                </p>
+                <div class="solution-box">
+                    <p class="solution-title">Examples of Vectors</p>
+                    <ul class="simple-list">
+                        <li>**Force** (e.g., 100 N pulling North)</li>
+                        <li>**Velocity** (e.g., 15 m/s moving at 45° East of North)</li>
+                        <li>**Acceleration**, **Displacement**, **Momentum**, **Electric Field Intensity**</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <section id="section-rep" class="mb-12">
+                <h2>3. **Representation and Definitions**</h2>
+
+                <h3>3.1 Vector Notation</h3>
+                <p>Vectors are identified by their notation, which distinguishes them from scalars:</p>
+                <ul class="simple-list">
+                    <li>**Printed Text:** A vector is represented by a **bold letter**, such as **A** or **r**.</li>
+                    <li>**Handwriting & Formulas:** A vector is typically written as a letter followed by a right-arrow (e.g., A→ or r→), which will be used in the formulas below.</li>
+                    <li>**Magnitude:** The magnitude of a vector A→ is its length, written as |A→| or simply A (not bold).</li>
+                </ul>
+                
+                <h3>3.2 Graphical Representation</h3>
+                <p>A vector is drawn as an **arrow**. The **length** of the arrow represents the **magnitude** (to a chosen scale), and the **arrowhead** indicates the **direction**.</p>
+                
+                <h3>3.3 Vector Definitions</h3>
+                <ul class="simple-list">
+                    <li>**Equal Vectors:** Two vectors, A→ and B→, are equal if they have the **same magnitude** and point in the **same direction**.</li>
+                    <li>**Negative Vector:** The negative of a vector A→ (written as -A→) has the **same magnitude** as A→ but points in the **opposite direction**.</li>
+                    <li>**Unit Vector (n→):** A dimensionless vector with a **magnitude of exactly one (1)**, used purely to specify a direction. The unit vector along A→ is:
+                        <div class="math-block">
+                            n→ = A→ / |A→|
+                        </div>
+                    </li>
+                    <li>**Zero Vector (Null Vector):** A vector whose magnitude is **zero**. Its direction is undefined.</li>
+                </ul>
+            </section>
+            
+            <hr>
+
+            <section id="section-add" class="mb-12">
+                <h2>4. **Vector Addition (Geometric & Analytical)**</h2>
+                <p>The result of adding two or more vectors is called the **resultant vector** (R→).</p>
+
+                <h3>4.1 **Triangle Law of Addition (Geometric)**</h3>
+                <p>Used to find the resultant R→ = A→ + B→ graphically:</p>
+                <ul class="step-list">
+                    <li>**Step 1:** Draw vector A→ to scale.</li>
+                    <li>**Step 2:** Place the **tail** of vector B→ at the **head** (tip) of vector A→ (Tip-to-Tail Rule).</li>
+                    <li>**Step 3:** The **resultant R→** is the vector drawn from the **tail of A→** to the **head of B→**.</li>
+                </ul>
+                
+                <h4>Magnitude Calculation (Law of Cosines)</h4>
+                <p>If A and B are placed tail-to-tail, and ∅ is the angle between them, the magnitude of the resultant R is given by:</p>
+                <div class="math-block">
+                    R = |R→| = √(A² + B² + 2AB cos(∅))
+                </div>
+
+                <h3>4.2 **Vector Subtraction**</h3>
+                <p>Vector subtraction (R→ = A→ - B→) is achieved by finding the negative vector -B→ and adding it to A→: R→ = A→ + (-B→).</p>
+
+                <h3>4.3 **Analytical Method (Components)**</h3>
+                <p>This is the most precise method, relying on breaking down vectors into perpendicular components along coordinate axes, defined by unit vectors i→ (x-axis), j→ (y-axis), and k→ (z-axis).</p>
+
+                <h4>Vector Resolution</h4>
+                <p>Any vector A→ can be written in component form (3D):</p>
+                <div class="math-block">
+                    A→ = Aₓ i→ + Aᵧ j→ + A𝓏 k→
+                </div>
+                <p>Where Aₓ = A cos(∅) and Aᵧ = A sin(∅) for a 2D vector making angle ∅ with the positive x-axis.</p>
+
+                <h4>Addition Procedure</h4>
+                <ul class="step-list">
+                    <li>**Step 1:** Sum the corresponding components of all vectors to find the resultant components Rₓ, Rᵧ, R𝓏:</li>
+                    <div class="math-block">
+                        Rₓ = Aₓ + Bₓ + Cₓ + ...
+                        <br>
+                        Rᵧ = Aᵧ + Bᵧ + Cᵧ + ...
+                        <br>
+                        R𝓏 = A𝓏 + B𝓏 + C𝓏 + ...
+                    </div>
+                    <li>**Step 2:** Calculate the **Magnitude (R)**:</li>
+                    <div class="math-block">
+                        R = |R→| = √(Rₓ² + Rᵧ² + R𝓏²)
+                    </div>
+                    <li>**Step 3 (2D only):** Find the **Direction (∅)** of the resultant:</li>
+                    <div class="math-block">
+                        ∅ = tan⁻¹(Rᵧ / Rₓ)
+                    </div>
+                </ul>
+
+                <h4>Example: Resultant Velocity</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Calculate the resultant velocity R→ = V₁→ + V₂→.</p>
+                    <p>Given: V₁→ = 6 i→ + 4 j→ (m/s) and V₂→ = -2 i→ + 8 j→ (m/s)</p>
+                    <ul class="step-list">
+                        <li>**Find Resultant Components (Rₓ, Rᵧ):**</li>
+                        <div class="math-block">
+                            Rₓ = 6 + (-2) = 4 m/s
+                            <br>
+                            Rᵧ = 4 + 8 = 12 m/s
+                            <br>
+                            Resultant Vector: R→ = 4 i→ + 12 j→ (m/s)
+                        </div>
+                        <li>**Find Magnitude (R):**</li>
+                        <div class="math-block">
+                            R = √(4² + 12²) = √(16 + 144) = √160 ≈ 12.65 m/s
+                        </div>
+                        <li>**Find Direction (∅):**</li>
+                        <div class="math-block">
+                            ∅ = tan⁻¹(12 / 4) = tan⁻¹(3) ≈ 71.6°
+                        </div>
+                    </ul>
+                    <p>**Result:** The resultant velocity is **12.65 m/s at 71.6°** above the positive x-axis.</p>
+                </div>
+
+            </section>
+
+            <hr>
+
+            <section id="section-mult" class="mb-12">
+                <h2>5. **Multiplying Vectors**</h2>
+                <p>There are two primary ways to multiply vectors, yielding either a scalar or another vector.</p>
+
+                <h3>5.1 **The Scalar (Dot) Product**</h3>
+                <p>The **dot product** (A→ ⋅ B→) results in a **scalar** quantity. It measures how much of one vector points in the direction of the other.</p>
+
+                <h4>Formula and Properties</h4>
+                <ul class="step-list">
+                    <li>**Definition (Magnitude and Angle):** ∅ is the angle between A→ and B→.</li>
+                    <div class="math-block">
+                        A→ ⋅ B→ = A B cos(∅)
+                    </div>
+                    <li>**Component Form:** Sum the products of corresponding components.</li>
+                    <div class="math-block">
+                        A→ ⋅ B→ = AₓBₓ + AᵧBᵧ + A𝓏B𝓏
+                    </div>
+                    <li>**Orthogonality Test:** If A→ and B→ are **perpendicular** (∅ = 90°), their dot product is 0.</li>
+                </ul>
+
+                <h4>Example: Dot Product Calculation</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Find the dot product of A→ = 2 i→ + 1 j→ and B→ = 4 i→ - 8 j→.</p>
+                    <div class="math-block">
+                        A→ ⋅ B→ = (2)(4) + (1)(-8)
+                        <br>
+                        A→ ⋅ B→ = 8 - 8 = **0**
+                    </div>
+                    <p>Since the dot product is zero, the vectors A→ and B→ are perpendicular to each other.</p>
+                </div>
+
+                <h3>5.2 **The Vector (Cross) Product**</h3>
+                <p>The **cross product** (A→ $\times$ B→) results in a new **vector** (C→). The resultant vector C→ is always **perpendicular** to the plane formed by A→ and B→.</p>
+
+                <h4>Formula and Properties</h4>
+                <ul class="step-list">
+                    <li>**Definition (Magnitude):** ∅ is the angle between A→ and B→.</li>
+                    <div class="math-block">
+                        |C→| = |A→ $\times$ B→| = A B sin(∅)
+                    </div>
+                    <li>**Direction:** Determined by the **Right-Hand Rule**.</li>
+                    <li>**Non-Commutative:** The order is critical: A→ $\times$ B→ = - (B→ $\times$ A→).</li>
+                    <li>**Parallelism Test:** If A→ and B→ are **parallel** (∅ = 0°), their cross product is the zero vector (0→).</li>
+                </ul>
+
+                <h4>Component Formula</h4>
+                <p>If C→ = A→ $\times$ B→, the components of C→ are calculated using the following expansion:</p>
+                <div class="math-block">
+                    Cₓ = (AᵧB𝓏 - A𝓏Bᵧ)
+                    <br>
+                    Cᵧ = (A𝓏Bₓ - AₓB𝓏)
+                    <br>
+                    C𝓏 = (AₓBᵧ - AᵧBₓ)
+                </div>
+
+                <h4>Example: Cross Product Calculation</h4>
+                <div class="solution-box">
+                    <p class="solution-title">Find the cross product C→ = A→ $\times$ B→.</p>
+                    <p>Given: A→ = 1 i→ + 2 j→ + 3 k→ and B→ = 4 i→ + 5 j→ + 6 k→</p>
+                    <ul class="step-list">
+                        <li>**Calculate Cₓ (i component):**</li>
+                        <div class="math-block">
+                            Cₓ = (AᵧB𝓏 - A𝓏Bᵧ) = (2)(6) - (3)(5) = 12 - 15 = -3
+                        </div>
+                        <li>**Calculate Cᵧ (j component):**</li>
+                        <div class="math-block">
+                            Cᵧ = (A𝓏Bₓ - AₓB𝓏) = (3)(4) - (1)(6) = 12 - 6 = 6
+                        </div>
+                        <li>**Calculate C𝓏 (k component):**</li>
+                        <div class="math-block">
+                            C𝓏 = (AₓBᵧ - AᵧBₓ) = (1)(5) - (2)(4) = 5 - 8 = -3
+                        </div>
+                    </ul>
+                    <p>**Result:** C→ = A→ $\times$ B→ = **-3 i→ + 6 j→ - 3 k→**</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

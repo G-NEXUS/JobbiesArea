@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA Unit1</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    <style>
+        /* Color Variables */
+        :root {
+            --color-teal-50: #f0fdfa;
+            --color-teal-100: #ccfbf1;
+            --color-teal-500: #14b8a6;
+            --color-teal-600: #0d9488;
+            --color-teal-700: #0f766e;
+            --color-slate-50: #f8fafc;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-slate-50);
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            font-size: 12px;
+        }
+
+        /* Responsive Typography */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* Container */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 768px) {
+            .container-notes {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container-notes {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-teal-500);
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h3 {
+                font-size: 1.75rem;
+            }
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h4 {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h4 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Header Section */
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-teal-600);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 0.875rem;
+            }
+        }
+
+        .description {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .description {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul.simple-list, 
+        ol.numbered-list {
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            ul.simple-list, 
+            ol.numbered-list {
+                margin-left: 1.5rem;
+            }
+        }
+
+        ul.simple-list {
+            list-style: disc;
+        }
+
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        li ul.simple-list {
+            margin-top: 0.5rem;
+        }
+
+        /* Key Terms */
+        .key-term {
+            color: var(--color-teal-700);
+            font-weight: 600;
+        }
+
+        /* Back Button */
+        .zen {
+            display: inline-block;
+            background-color: rgb(11, 205, 11);
+            color: whitesmoke;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.625rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .zen {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.875rem;
+            }
+        }
+
+        .zen:hover {
+            background-color: rgb(8, 154, 8);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: #0d9488;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /* Strong/Bold Text */
+        strong, b {
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+
+        /* Italic Text */
+        i, em {
+            font-style: italic;
+        }
+
+        /* Responsive Images (if added later) */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* Cornell Table */
+        .cornell-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table {
+                font-size: 0.95rem;
+            }
+        }
+
+        .cornell-table th, 
+        .cornell-table td {
+            border: 1px solid var(--color-slate-300);
+            padding: 0.625rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table th, 
+            .cornell-table td {
+                padding: 0.75rem;
+            }
+        }
+
+        .cornell-table th {
+            background-color: var(--color-teal-500);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .cornell-table th {
+                font-size: 0.875rem;
+            }
+        }
+
+        .cue-column {
+            width: 35%;
+            font-weight: 600;
+            background-color: var(--color-teal-50);
+        }
+
+        @media (min-width: 768px) {
+            .cue-column {
+                width: 30%;
+            }
+        }
+
+        .note-area {
+            width: 65%;
+        }
+
+        @media (min-width: 768px) {
+            .note-area {
+                width: 70%;
+            }
+        }
+
+        /* Summary Block */
+        .summary-block {
+            background-color: var(--color-teal-100);
+            border-top: 3px solid var(--color-teal-600);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .summary-block h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-block p {
+            margin: 0;
+            color: var(--color-gray-800);
+        }
+
+        /* Table of Contents */
+        .toc-nav {
+            margin-bottom: 2rem;
+            background-color: var(--color-teal-50);
+            border: 1px solid var(--color-teal-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            .toc-nav {
+                margin-bottom: 2.5rem;
+                padding: 1.25rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        .toc-title {
+            font-weight: 700;
+            color: var(--color-teal-700);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            border-bottom: 1px dashed var(--color-teal-200);
+            padding-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .toc-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+            display: block;
+            padding-left: 0.75rem;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            color: var(--color-teal-600);
+            font-weight: 600;
+            border-left: 2px solid var(--color-teal-500);
+        }
+
+        .unit-heading {
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            padding-left: 0;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .unit-heading {
+                font-size: 1rem;
+            }
+        }
+
+        .unit-heading:first-child {
+            margin-top: 0;
+        }
+
+        /* Example Blocks */
+        .example-block {
+            background-color: var(--color-teal-50);
+            border-left: 4px solid var(--color-teal-500);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+            color: var(--color-gray-800);
+            line-height: 1.7;
+        }
+
+        @media (min-width: 768px) {
+            .example-block {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        .example-block p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-block p:first-child {
+            margin-top: 0;
+        }
+
+        .example-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-weight: 700;
+            color: var(--color-teal-600);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .label {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Table Styling */
+        .example-table-container {
+            background-color: #ffffff;
+            border: 1px solid var(--color-teal-100);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        @media (min-width: 768px) {
+            .example-table-container {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        .example-table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .example-table-container table {
+                font-size: 0.9rem;
+            }
+        }
+
+        .example-table-container caption {
+            caption-side: top;
+            text-align: left;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            padding-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .example-table-container caption {
+                font-size: 1rem;
+            }
+        }
+
+        .example-table-container thead tr {
+            background-color: var(--color-teal-100);
+        }
+
+        .example-table-container th, 
+        .example-table-container td {
+            padding: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+        }
+
+        @media (min-width: 768px) {
+            .example-table-container th, 
+            .example-table-container td {
+                padding: 0.75rem;
+            }
+        }
+
+        .example-table-container th {
+            text-align: left;
+            color: var(--color-teal-700);
+            font-weight: 700;
+        }
+
+        .example-table-container tbody tr:nth-child(even) {
+            background-color: var(--color-slate-50);
+        }
+
+        .example-table-container tfoot {
+            font-size: 0.75rem;
+            color: var(--color-gray-600);
+        }
+
+        @media (min-width: 768px) {
+            .example-table-container tfoot {
+                font-size: 0.8rem;
+            }
+        }
+
+        .example-table-container tfoot td {
+            padding-top: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /* Strong/Bold Text */
+        strong, b {
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+
+        /* Italic Text */
+        i, em {
+            font-style: italic;
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background-color: var(--color-slate-100);
+            border: 2px dashed var(--color-slate-300);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--color-gray-600);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-placeholder {
+                padding: 2rem;
+            }
+        }
+
+        /* Responsive Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        nav{
+            background-color: black;
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">The Three Models of Communication</h2>
+            <a class="navbar-back" href="la111.html">← Back to LA111</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <header>
+                <p class="subtitle">Communication Theory</p>
+                <h1>Communication: Process, Elements, and Barriers</h1>
+                <p class="description">
+                    This guide breaks down the core components of human communication to help you understand how messages are sent, received, and sometimes lost.
+                </p>
+            </header>
+
+            <section id="section-definition">
+                <h2>1. Definition of Communication</h2>
+
+                <p>
+                    Communication is the process of conveying <strong>information, ideas, attitudes, or feelings from one person (or group) to another.</strong> It is successful when the receiver understands the message exactly as the sender intended.
+                </p>
+
+                <p>
+                    Essentially, it is about creating <strong>shared meaning</strong>. Without common understanding, communication is just transmission of sound or symbols, not true connection.
+                </p>
+            -</section>
+            
+            <section id="section-purpose">
+                <h2>2. Purpose of Communication Skills in Technical and Professional Training</h2>
+
+                <p>
+                    Developing strong communication skills is vital for success in professional and technical fields, extending far beyond basic classroom learning.
+                </p>
+
+                <ul class="simple-list">
+                    <li>
+                        <strong>Collaboration:</strong> Facilitates effective teamwork, problem-solving, and coordination on complex projects.
+                    </li>
+                    <li>
+                        <strong>Documentation:</strong> Essential for writing clear reports, proposals, technical manuals, and specifications that meet industry standards.
+                    </li>
+                    <li>
+                        <strong>Client/Stakeholder Management:</strong> Enables professionals to clearly explain complex technical information to non-technical audiences.
+                    </li>
+                    <li>
+                        <strong>Safety and Compliance:</strong> Ensures instructions, warnings, and safety procedures are communicated accurately to prevent accidents and maintain regulatory adherence.
+                    </li>
+                    <li>
+                        <strong>Career Advancement:</strong> Strong oral and written skills are often required for leadership roles, presentations, and interviewing.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-english">
+                <h2>3. Technical English and Common Core English</h2>
+
+                <p>
+                    While both are forms of English, they serve different purposes and follow distinct rules regarding vocabulary, style, and tone.
+                </p>
+
+                <ul class="simple-list">
+                    <li>
+                        <strong>Common Core English:</strong> Focuses on general communication, including literature, creative writing, and everyday conversation.
+                        <ul class="simple-list">
+                            <li><strong>Goal:</strong> To entertain, express emotion, or inform a general audience.</li>
+                            <li><strong>Characteristics:</strong> Subjective, evocative, uses varied vocabulary, focuses on flow and expressiveness.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Technical English:</strong> The style of writing used in fields like engineering, science, IT, and vocational training.
+                        <ul class="simple-list">
+                            <li><strong>Goal:</strong> To inform, instruct, or persuade a specific, technical audience.</li>
+                            <li><strong>Characteristics:</strong> Objective, precise, uses specialized terminology (jargon), focuses on clarity and conciseness.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>
+                    <strong>Professional Requirement:</strong> Technical and professional training emphasizes the mastery of <strong>Technical English</strong> because ambiguity can lead to major errors in the workplace.
+                </p>
+            </section>
+
+            <section id="section-process">
+                <h2>4. The Communication Process</h2>
+
+                <p>
+                    Communication is the two-way process of sharing ideas, feelings, and information in a way that creates mutual understanding. It is a cycle that starts and ends with shared meaning. 
+                </p>
+
+                <h3>4.1 The Communication Cycle (Simplified Steps)</h3>
+                <p>
+                    The process is a continuous loop involving distinct steps taken by the sender and the receiver.
+                </p>
+                <ol class="numbered-list">
+                    <li>
+                        <strong>Formulation (Sender):</strong> The sender develops an idea or intention they want to share.
+                    </li>
+                    <li>
+                        <strong>Encoding (Sender):</strong> The sender translates the idea into a message using words, symbols, or gestures (the code).
+                    </li>
+                    <li>
+                        <strong>Transmission (Sender):</strong> The sender sends the encoded message through a chosen channel (e.g., face-to-face, email, phone call).
+                    </li>
+                    <li>
+                        <strong>Reception (Receiver):</strong> The receiver physically receives the message through their senses (hearing, seeing, etc.).
+                    </li>
+                    <li>
+                        <strong>Decoding (Receiver):</strong> The receiver interprets or translates the message back into a meaningful idea. This step is key to understanding.
+                    </li>
+                    <li>
+                        <strong>Feedback (Receiver to Sender):</strong> The receiver creates a response or signal to show whether the message was understood (e.g., nodding, asking a question, replying to an email). This closes the loop.
+                    </li>
+                </ol>
+            </section>
+
+            <section id="section-elements">
+                <h2>5. The Seven Elements of Communication</h2>
+
+                <p>
+                    Effective communication requires all these elements to work together smoothly. When one element is weak or disrupted, the whole process suffers.
+                </p>
+
+                <ul class="simple-list">
+                    <li>
+                        <strong class="key-term">Sender (or Source):</strong> The person who initiates the communication and has the idea or information to share.
+                    </li>
+                    <li>
+                        <strong class="key-term">Message:</strong> The information, idea, or feeling that the sender wants to transmit. It is the encoded content.
+                    </li>
+                    <li>
+                        <strong class="key-term">Encoding:</strong> The process of converting the idea into a set of symbols (words, expressions, gestures).
+                    </li>
+                    <li>
+                        <strong class="key-term">Channel (or Medium):</strong> The pathway or method used to deliver the message (e.g., airwaves, written document, video call).
+                    </li>
+                    <li>
+                        <strong class="key-term">Decoding:</strong> The process by which the receiver interprets the symbols and converts them back into meaning.
+                    </li>
+                    <li>
+                        <strong class="key-term">Receiver:</strong> The person to whom the message is directed, who must interpret and understand the message.
+                    </li>
+                    <li>
+                        <strong class="key-term">Feedback:</strong> The receiver's response to the sender's message. It confirms that the message was received and understood (or misunderstood).
+                    </li>
+                    <li>
+                        <strong class="key-term">Noise:</strong> <i style="font-weight: 500;">(Often considered an eighth, external element)</i> Any disturbance or distraction that interferes with the transmission or reception of the message.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-barriers">
+                <h2>6. Barriers to Effective Communication</h2>
+                
+                <p>
+                    A communication barrier is anything that prevents the receiver from getting or understanding the message exactly as the sender intended. Overcoming these is crucial for clarity.
+                </p>
+
+                <h3>6.1 Types of Barriers</h3>
+                
+                <h4>a. Physical Barriers (Environmental)</h4>
+                <p>
+                    These are physical disturbances in the environment that block or distort the message.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Noise:</strong> Loud machinery, distracting background chatter, poor sound quality on a phone call.</li>
+                    <li><strong>Distance/Time:</strong> Geographical separation or delays in transmission (e.g., slow internet connection, time zone differences).</li>
+                    <li><strong>Faulty Equipment:</strong> Broken microphone, illegible handwriting, or a bad screen connection.</li>
+                </ul>
+
+                <h4>b. Psychological Barriers (Emotional/Mental)</h4>
+                <p>
+                    These relate to the state of mind, emotions, and attitudes of the sender or receiver.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Prejudice/Assumptions:</strong> Judging the message based on who the sender is, rather than the content itself.</li>
+                    <li><strong>Filtering/Selective Attention:</strong> The receiver only hears or sees what they want to, ignoring parts of the message that conflict with their beliefs.</li>
+                    <li><strong>Emotional State:</strong> Being angry, stressed, or overly excited can prevent clear thinking and accurate decoding.</li>
+                </ul>
+                
+                <h4>c. Semantic Barriers (Language)</h4>
+                <p>
+                    These occur when the message itself is unclear due to language, meaning, or understanding issues.
+                </p>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Jargon/Technical Language:</strong> Using complex terms only understood by a specific group (e.g., your partner or friend doing nursing comes and say, "that patient is experiencing dysphagia and odynophagia" and there looking like your landlord just told you that your rent is 3 months overdue LOL).
+                        <p>
+                            my friend tekanya the nurse just said "the patient is having trouble swallowing and it's painful"
+                        </p>
+                    </li>
+                    <li><strong>Different Meanings:</strong> When a word or phrase means something different to the sender than it does to the receiver.</li>
+                    <li><strong>Poorly Expressed Message:</strong> Vague, confusing, or grammatically incorrect sentences.</li>
+                    <li><strong>Body Language Mismatch:</strong> When non-verbal signals (like a frown) contradict the verbal message (like saying "I'm fine").</li>
+                </ul>
+
+                <h4>d. Organizational/Cultural Barriers</h4>
+                <p>
+                    These often occur in workplace or large group settings due to structure or diverse backgrounds.
+                </p>
+                <ul class="simple-list">
+                    <li><strong>Lack of Clear Rules:</strong> An unclear chain of command or poorly defined roles leading to confusion about who should communicate what.</li>
+                    <li><strong>Information Overload:</strong> Receiving too much information at once, making it impossible to process it all effectively.</li>
+                    <li><strong>Cultural Differences:</strong> Differences in etiquette, norms, non-verbal cues (e.g., eye contact, personal space) across cultures leading to misunderstanding.</li>
+                </ul>
+            </section>
+
+            <section id="section-forms">
+                <h2>7. Forms of Communication</h2>
+                
+                <p>
+                    Communication can be categorized based on how the message is delivered, which involves four main forms.
+                </p>
+
+                <h3>7.1 Based on Channel Used</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Verbal Communication:</strong> Uses spoken words. It is effective for immediate feedback and clarification.
+                        <ul class="simple-list">
+                            <li><strong>Examples:</strong> Face-to-face conversations, phone calls, presentations.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Non-Verbal Communication:</strong> Messages sent without words, often complementing or contradicting verbal messages.
+                        <ul class="simple-list">
+                            <li><strong>Examples:</strong> Body language (posture, gestures), facial expressions, tone of voice, eye contact, appearance.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Written Communication:</strong> Uses written or typed words. It is permanent, formal, and allows for careful thought.
+                        <ul class="simple-list">
+                            <li><strong>Examples:</strong> Reports, emails, manuals, letters, memos.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Visual Communication:</strong> Uses images, graphics, and symbols. It is effective for quickly conveying complex data.
+                        <ul class="simple-list">
+                            <li><strong>Examples:</strong> Charts, graphs, maps, traffic signs, infographics.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>7.2 Based on Organizational Relationship</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Formal Communication:</strong> Follows the officially prescribed channels, hierarchy, and rules of the organization.
+                    </li>
+                    <li>
+                        <strong>Informal Communication:</strong> The unofficial exchange of information, often known as the 'grapevine'. It is fast but can be inaccurate.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="section-patterns">
+                <h2>8. Patterns of Communication in Organisations</h2>
+                
+                <p>
+                    Organizational communication follows structured patterns (or flows) to manage information and decision-making within a hierarchy.
+                </p>
+
+                <h3>8.1 Directional Flows</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Downward Communication:</strong> Flows from superiors to subordinates (e.g., managers giving instructions to employees). Its purpose is to inform, instruct, or justify decisions.
+                    </li>
+                    <li>
+                        <strong>Upward Communication:</strong> Flows from subordinates to superiors (e.g., employees submitting reports, feedback, or suggestions to management). Its purpose is to provide feedback and report progress.
+                    </li>
+                    <li>
+                        <strong>Horizontal (Lateral) Communication:</strong> Flows between employees at the same organizational level (e.g., colleagues in different departments coordinating on a project). Its purpose is to coordinate and solve problems.
+                    </li>
+                    <li>
+                        <strong>Diagonal Communication:</strong> Flows between individuals who are in different departments and at different levels (e.g., a junior engineer consulting directly with a senior manager in the finance department). It speeds up action but can bypass the formal chain of command.
+                    </li>
+                </ul>
+                
+                <h3>8.2 Network Structures (Small Group)</h3>
+                <p>
+                    These describe how communication links are structured within small teams or groups.
+                </p>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Chain Network:</strong> Communication flows sequentially in a line (A to B to C). Slow but highly accurate.
+                    </li>
+                    <li>
+                        <strong>Wheel Network:</strong> All communication flows through one central person (the leader). Fast for problem-solving but can lead to overload for the central figure.
+                    </li>
+                    <li>
+                        <strong>All-Channel Network:</strong> Everyone communicates with everyone else. Fastest for sharing information and best for morale, but can be chaotic for decision-making.
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+    
+
+</body>
+</html>

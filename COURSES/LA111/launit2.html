@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA Unit2</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --color-teal-50: #f0fdfa;
+            --color-teal-100: #ccfbf1;
+            --color-teal-500: #14b8a6;
+            --color-teal-600: #0d9488;
+            --color-teal-700: #0f766e;
+            --color-slate-50: #f8fafc;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-slate-50);
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            font-size: 14px;
+        }
+
+        /* Responsive Typography */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* Container */
+        .container-notes {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        @media (min-width: 768px) {
+            .container-notes {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container-notes {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-teal-500);
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h3 {
+                font-size: 1.75rem;
+            }
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            h4 {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h4 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Header Section */
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-teal-600);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 0.875rem;
+            }
+        }
+
+        .description {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .description {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul.simple-list, 
+        ol.numbered-list {
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-gray-700);
+        }
+
+        @media (min-width: 768px) {
+            ul.simple-list, 
+            ol.numbered-list {
+                margin-left: 1.5rem;
+            }
+        }
+
+        ul.simple-list {
+            list-style: disc;
+        }
+
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        li ul.simple-list {
+            margin-top: 0.5rem;
+        }
+
+        /* Key Terms */
+        .key-term {
+            color: var(--color-teal-700);
+            font-weight: 600;
+        }
+
+        /* Back Button */
+        .zen {
+            display: inline-block;
+            background-color: rgb(11, 205, 11);
+            color: whitesmoke;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.625rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .zen {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.875rem;
+            }
+        }
+
+        .zen:hover {
+            background-color: rgb(8, 154, 8);
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /* Strong/Bold Text */
+        strong, b {
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+
+        /* Italic Text */
+        i, em {
+            font-style: italic;
+        }
+
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            background-color: var(--color-slate-100);
+            border: 2px dashed var(--color-slate-300);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-gray-600);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-placeholder {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Responsive Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Essential Writing Skills</h2>
+            <a class="navbar-back" href="la111.html">← Back to LA111</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <!-- Title and Header -->
+            <header>
+                <p class="subtitle">Communication Theory</p>
+                <h1>The Three Models of Communication</h1>
+                <p class="description">
+                    Understanding the models helps to conceptualize the communication process, ranging from a simple one-way transfer to a complex, simultaneous exchange.
+                </p>
+            </header>
+
+            <!-- Section 1: Introduction to Models -->
+            <section id="section-overview">
+                <h2>1. Introduction to Models</h2>
+
+                <p>
+                    Communication models are conceptual diagrams or frameworks used to explain how the communication process works. They simplify complex interactions and highlight key components like the sender, receiver, message, and feedback. The three main models represent an evolution in understanding, moving from simple, one-way action to complex, simultaneous exchange.
+                </p>
+            </section>
+            
+            <!-- Section 2: The Linear Model -->
+            <section id="section-linear">
+                <h2>2. The Linear Model of Communication</h2>
+                
+                <div class="image-placeholder">
+                    [Image of Linear Model of Communication]
+                </div>
+
+                <h3>2.1 Core Concept</h3>
+                <p>
+                    The Linear Model is the simplest model, conceptualizing communication as a <span class="key-term">one-way process</span> where a message travels from the sender to the receiver. It's often referred to as the "Action Model."
+                </p>
+                <p>
+                    Historically, the most famous Linear Model is the <strong>Shannon-Weaver Model</strong>, developed by <strong>Claude Shannon and Warren Weaver in 1949</strong>.
+                </p>
+
+                <h3>2.2 Key Characteristics and Components</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>One-Way Flow:</strong> The process is a straight line: Sender sends, Receiver receives.
+                    </li>
+                    <li>
+                        <strong>No Feedback Loop:</strong> In its earliest form, this model does not account for a response from the receiver.
+                    </li>
+                    <li>
+                        <strong>Key Components:</strong> Sender (Source), Encoder, Message, Channel, Decoder, Receiver, and Noise (introduced by Shannon & Weaver).
+                    </li>
+                    <li>
+                        <strong>Focus:</strong> Primarily focused on the <span class="key-term">channel</span> and avoiding <span class="key-term">noise</span>, as it originated in technical communication (e.g., radio transmission).
+                    </li>
+                </ul>
+
+                <h3>2.3 Examples and Limitations</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Examples:</strong> Public speaking, watching a news broadcast, reading a newspaper, or sending a mass email.
+                    </li>
+                    <li>
+                        <strong>Limitation:</strong> It fails to capture the complexity of human interaction, especially the absence of immediate feedback and the assumption that the roles of sender and receiver are fixed.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 3: The Interactive Model -->
+            <section id="section-interactive">
+                <h2>3. The Interactive Model of Communication</h2>
+
+                <h3>3.1 Core Concept</h3>
+                <p>
+                    The Interactive Model (also called the "Convergence Model" or "Schramm's Model") views communication as a <span class="key-term">two-way process</span> that includes feedback. It recognizes that communicators alternate roles as sender and receiver.
+                </p>
+                <p>
+                    A notable Interactive Model is <strong>Schramm's Model of Communication</strong>, developed by <strong>Wilbur Schramm in 1954</strong>.
+                </p>
+
+                <h3>3.2 Key Characteristics and Components</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Two-Way Process:</strong> After the initial message, the receiver processes the message and sends back feedback, becoming the new sender.
+                    </li>
+                    <li>
+                        <strong>Feedback Loop:</strong> A response is incorporated, making the process cyclical rather than linear.
+                    </li>
+                    <li>
+                        <strong>Field of Experience:</strong> This model introduces the importance of the communicators' <span class="key-term">Field of Experience</span> (shared knowledge, background, culture). Communication is easier when these fields overlap.
+                    </li>
+                    <li>
+                        <strong>Time Delay:</strong> While it includes feedback, the model suggests that communication is a step-by-step process where roles switch sequentially (A speaks, B listens, then B speaks, A listens).
+                    </li>
+                </ul>
+
+                <h3>3.3 Examples and Limitations</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Examples:</strong> Email exchanges, forum discussions, question-and-answer sessions, or old-fashioned letter writing.
+                    </li>
+                    <li>
+                        <strong>Limitation:</strong> It still doesn't capture the real-time, simultaneous nature of face-to-face communication, where people often send and receive messages (verbal and non-verbal) at the same time.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 4: The Transactional Model -->
+            <section id="section-transactional">
+                <h2>4. The Transactional Model of Communication</h2>
+
+                <h3>4.1 Core Concept</h3>
+                <p>
+                    The Transactional Model is the most comprehensive and widely accepted model for interpersonal and face-to-face communication. It views communication as a <span class="key-term">simultaneous process</span> where communicators are both sending and receiving messages at the same time.
+                </p>
+                <p>
+                    Key theorists associated with developing the Transactional view include <strong>Barnlund (1970)</strong> and <strong>Dance (1967)</strong>, building on earlier work.
+                </p>
+
+                <h3>4.2 Key Characteristics and Components</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Simultaneous Exchange:</strong> Both participants are known as <span class="key-term">Communicators</span> rather than fixed senders and receivers. They encode and decode at the same moment.
+                    </li>
+                    <li>
+                        <strong>Interdependence:</strong> Communication depends on the relationship between the communicators and the surrounding context.
+                    </li>
+                    <li>
+                        <strong>Context:</strong> This model heavily emphasizes the role of context—cultural, relational, social, and environmental factors—in shaping the message.
+                    </li>
+                    <li>
+                        <strong>Non-Verbal Focus:</strong> It acknowledges that non-verbal cues (like nodding while listening, frowning while speaking) are messages being sent back even as verbal messages are being received.
+                    </li>
+                </ul>
+
+                <h3>4.3 Examples and Importance</h3>
+                <ul class="simple-list">
+                    <li>
+                        <strong>Examples:</strong> Face-to-face conversations, group discussions, video conferencing.
+                    </li>
+                    <li>
+                        <strong>Importance:</strong> This model highlights the idea that communication is not just about conveying information, but about <span class="key-term">creating shared meaning</span> and <span class="key-term">building relationships</span>.
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>

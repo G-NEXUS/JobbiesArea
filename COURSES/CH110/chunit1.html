@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH 110: Introduction to General Chemistry</title>
+    <link rel="icon" type="image/png" href="app_icon.png" >
+    
+    <style>
+        /* Define color variables for consistency (using the original blue palette) */
+        :root {
+            --color-blue-50: #eff6ff;
+            --color-blue-100: #dbeafe;
+            --color-blue-200: #bfdbfe;
+            --color-blue-500: #3b82f6;
+            --color-blue-600: #2563eb;
+            --color-blue-700: #1d4ed8;
+            --color-blue-800: #1e40af;
+            --color-slate-50: #f8fafc;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+        }
+
+        /* General Setup */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .container-notes {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 2.5rem;
+            border: 1px solid var(--color-slate-200);
+        }
+
+        /* Typography and Headings */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 800; /* font-extrabold */
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 600px) { /* sm: */
+            h1 {
+                font-size: 3rem; /* sm:text-5xl */
+            }
+        }
+
+        h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: var(--color-gray-800);
+            border-bottom: 2px solid var(--color-blue-500);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: var(--color-gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: var(--color-gray-800);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-slate-300);
+        }
+        
+        header .subtitle {
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* font-semibold */
+            text-transform: uppercase;
+            letter-spacing: 0.05em; /* tracking-wider */
+            color: var(--color-blue-600);
+        }
+
+        header .description {
+            margin-top: 0.75rem;
+            font-size: 1.125rem; /* text-lg */
+            color: var(--color-gray-600);
+        }
+
+        p {
+            color: var(--color-gray-700);
+            margin-top: 1rem;
+        }
+        
+        /* Navigation (TOC) */
+        .toc-nav {
+            margin-bottom: 2.5rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem; /* text-sm */
+            color: var(--color-gray-700);
+        }
+        
+        .toc-nav .toc-title {
+            font-weight: 700; /* font-bold */
+            color: var(--color-blue-700);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.25rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        @media (min-width: 640px) { /* sm: */
+            .toc-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .toc-list a {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        
+        .toc-list a:hover {
+            color: var(--color-blue-600);
+        }
+
+        /* List Styles */
+        ul.simple-list, ol.numbered-list {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--color-gray-700);
+        }
+        
+        ol.numbered-list {
+            list-style: decimal;
+        }
+
+        /* Custom bullet points */
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-style-none > li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        .list-style-none > li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-700);
+            font-weight: bold;
+        }
+        
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-slate-300);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            max-width: 100%; /* For responsiveness */
+        }
+        
+        table {
+            min-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.25rem;
+        }
+
+        thead {
+            background-color: var(--color-slate-100);
+            border-bottom: 1px solid var(--color-slate-200);
+        }
+
+        th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 700; /* font-bold */
+            color: var(--color-gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.05em; /* tracking-wider */
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-bottom: 1px solid var(--color-slate-200);
+            color: var(--color-gray-700);
+        }
+        
+        /* Solved Problem Styles */
+        .solution-box {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 500; /* font-medium */
+            color: var(--color-blue-800);
+        }
+        
+        .math-block {
+            font-family: monospace;
+            font-size: 1.05rem;
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .zen{
+            background-color: blue;
+            
+            padding: 10px 30px;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+            font-size: 0.9rem;
+        }
+
+        .zen:hover {
+            background-color: #3341b8;
+        }
+
+        nav.navbar {
+            background-color: var(--color-blue-600);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar-back {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .navbar-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* ========== COMPREHENSIVE RESPONSIVE IMPROVEMENTS ========== */
+        
+        /* Font Scaling with clamp() for better responsiveness */
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem) !important;
+        }
+        
+        h2 {
+            font-size: clamp(1.25rem, 4vw, 1.875rem) !important;
+        }
+        
+        h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem) !important;
+        }
+        
+        h4 {
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem) !important;
+        }
+        
+        p {
+            font-size: clamp(0.875rem, 2vw, 1rem) !important;
+        }
+        
+        body, .container-notes, .toc-nav {
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        }
+        
+        /* Mobile-first padding and margins (480px breakpoint) */
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .container-notes {
+                padding: 0.75rem !important;
+                margin: 0 !important;
+                border-radius: 0.25rem;
+            }
+            
+            header {
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+            
+            h1, h2, h3, h4 {
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                margin: 0.5rem 0 !important;
+            }
+            
+            .toc-nav {
+                padding: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .toc-list {
+                gap: 0.125rem 0.5rem !important;
+            }
+            
+            section {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
+        /* Container width responsiveness */
+        @media (max-width: 480px) {
+            .container-notes {
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container-notes {
+                width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-notes {
+                width: 85% !important;
+            }
+        }
+        
+        /* Navbar responsive improvements */
+        @media (max-width: 640px) {
+            nav.navbar {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .navbar-container {
+                padding: 0 0.5rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: clamp(1rem, 3vw, 1.25rem) !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .navbar-back {
+                padding: 0.4rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-title {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Table improvements for mobile */
+        @media (max-width: 480px) {
+            table {
+                font-size: 0.7rem !important;
+            }
+            
+            th, td {
+                padding: 0.4rem 0.5rem !important;
+            }
+            
+            th {
+                font-size: 0.65rem !important;
+            }
+        }
+        
+        /* List indentation adjustments for mobile */
+        @media (max-width: 480px) {
+            ul.simple-list, ol.numbered-list {
+                margin-left: 1rem !important;
+            }
+            
+            .list-style-none > li {
+                padding-left: 1rem !important;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Definition/Solution boxes mobile optimization */
+        @media (max-width: 480px) {
+            .solution-box, .definition-box {
+                padding: 0.6rem !important;
+                margin: 0.5rem 0 !important;
+                border-radius: 0.3rem;
+            }
+            
+            .solution-title, .definition-title {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem !important;
+            }
+        }
+        
+        /* Math blocks responsive */
+        .math-display, .math-block {
+            overflow-x: auto !important;
+            font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        }
+        
+        @media (max-width: 480px) {
+            .math-block, .math-display {
+                padding: 0.6rem !important;
+                margin: 0.75rem 0 !important;
+                font-size: 0.7rem !important;
+                white-space: pre-wrap;
+            }
+        }
+        
+        /* Step list responsive */
+        @media (max-width: 480px) {
+            .step-list {
+                padding-left: 0 !important;
+            }
+            
+            .step-list li {
+                margin-bottom: 0.75rem !important;
+                padding-left: 1.75rem !important;
+            }
+            
+            .step-list li::before {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        /* Zen button responsive */
+        @media (max-width: 480px) {
+            .zen {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Extra small screens improvements */
+        @media (max-width: 320px) {
+            body {
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .solution-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--color-blue-50);
+            border: 1px solid var(--color-blue-200);
+            border-radius: 0.5rem;
+        }
+        
+        .solution-box .solution-title {
+            font-weight: 600;
+            color: var(--color-blue-800);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--color-blue-600);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: var(--color-gray-800);
+            background-color: var(--color-slate-100);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid var(--color-blue-500);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h2 class="navbar-title">Matter, Measurement, and Fundamentals</h2>
+            <a class="navbar-back" href="chem.html">← Back to Chemistry</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container-notes">
+
+            <!-- Title and Header -->
+            <header>
+                
+                
+                <p class="subtitle">Introduction to General Chemistry</p>
+                <h1>
+                    Matter, Measurement, and Fundamentals
+                </h1>
+                <p class="description">
+                    Core concepts covering the classification and properties of matter, atomic theory, measurement techniques, and the scientific method.
+                </p>
+            </header>
+
+            <!-- Table of Contents -->
+            <nav class="toc-nav">
+                <p class="toc-title">Table of Contents</p>
+                <ul class="toc-list">
+                    <li><a href="#section-scientific-method">1. The Scientific Method</a></li>
+                    <li><a href="#section-dalton-theory">2. Dalton's Atomic Theory</a></li>
+                    <li><a href="#section-classification-matter">3. Classification and Properties of Matter</a></li>
+                    <li><a href="#section-measurement">4. The SI System and Measurement</a></li>
+                    <li><a href="#section-naming-simple-compounds">5. Dimensional Analysis (The Unit Factor Method)</a></li>
+                </ul>
+            </nav>
+
+
+            <!-- Section 1: The Scientific Method (Detailed) -->
+            <section id="section-scientific-method" class="mb-12">
+                <h2>1. The Scientific Method</h2>
+
+                <p>
+                    The Scientific Method is a systematic, logical approach to research.
+                </p>
+
+                <h3>1.1 Steps of the Method </h3>
+                <ol class="numbered-list">
+                    
+                    <li>
+                        <b>Define a problem:</b> Notice something interesting.
+                        <p style="margin-top: 0.25rem; font-style: italic;"></p>
+                    </li>
+                    <li>
+                        <b>Experiment:</b> Design and perform an investigation to test the hypothesis. Experiments must be controlled and must produce repeatable data.
+                        <p style="margin-top: 0.25rem; font-style: italic;"></p>
+                    </li>
+                    <li>
+                        <b>Observation:</b> Notice what is happening in the experiment and collect data.
+                        <p style="margin-top: 0.25rem; font-style: italic;">The data collected can be <strong><i>Quantitative</i></strong> (Measurable) or <strong><i>Qualitative</i></strong> (properties)</p>
+                    </li>
+                    <li>
+                        <b>Hypothesis:</b> this is a testable, possible explanation to an observation.
+                        <p style="margin-top: 0.25rem; font-style: italic;"></p>
+                    </li>
+                    <li>
+                        <b>Law:</b> is mathematical statement of a relationship between phenomena that is always the same under the <strong>same</strong> conditions
+                    </li>
+                    <li>
+                        <b>Theory:</b> This is a set of tested hypothesis that gives an overall explanation of natural phenomina
+                        <p style="margin-top: 0.25rem; font-style: italic;"></p>
+                    </li>
+                </ol>
+
+                <!--<h3>1.2 Laws and Theories</h3>
+                <ul class="list-style-none">
+                    <li><b>Scientific Law:</b> Describes <strong>what</strong> happens under certain conditions, often with a mathematical formula. It summarizes observations but doesn't explain <strong>why</strong>. (e.g., Law of Conservation of Mass: Mass of reactants = Mass of products).</li>
+                    <li><b>Scientific Theory:</b> Explains <strong>why</strong> nature behaves the way it does. It is a broad, tested explanation that unifies many related observations and laws. (e.g., Dalton's Atomic Theory explains the Law of Conservation of Mass).</li>
+                </ul>-->
+            </section>
+
+            <!-- Section 2: Dalton's Atomic Theory -->
+            <section id="section-dalton-theory" class="mb-12">
+                <h2>2. Dalton's Atomic Theory</h2>
+
+                <p>
+                    John Dalton's theory was the first comprehensive model describing matter as being composed of tiny, indivisible particles called atoms. It is the basis of modern chemistry.
+                </p>
+
+                <h3>2.1 The Four Main Postulates</h3>
+                <ul class="simple-list">
+                    <li>
+                        <b><strong>Matter is made of Atoms:</strong></b>  All matter is composed of extremely small, indivisible particles called atoms. (Modern change: Atoms <strong><u>are</u></strong> divisible into subatomic particles.)
+                    </li>
+                    <li>
+                        <b><strong>Atoms of the Same Element are Identical:</strong></b> All atoms of a given element are identical in size, mass, and other properties; atoms of different elements differ in these properties. (Modern change: Isotopes exist, which are atoms of the same element with different masses.)
+                    </li>
+                    <li>
+                        <b><strong>Atoms Cannot Be Created or Destroyed:</strong></b> Atoms cannot be created or destroyed, nor can they be converted into atoms of other elements. Chemical reactions simply rearrange how atoms are grouped. (This explains the <strong><u>Law of Conservation of Mass</u></strong>.)
+                    </li>
+                    <li>
+                        <b>Compounds are Formed by Combining Atoms:</b> Atoms of different elements combine in simple whole-number ratios to form chemical compounds. (This explains the <strong><u>Law of Definite Proportions</u></strong> and the <strong><u>Law of Multiple Proportions</u></strong>.)
+                    </li>
+                </ul>
+
+                <h4>Key Laws Explained by Dalton</h4>
+                <p>
+                    Dalton's theory successfully explained the foundational laws of chemistry:
+                </p>
+                <ul class="list-style-none">
+                    <li><b><strong>Law of Conservation of Mass:</strong></b> Since atoms are not created or destroyed in a reaction (Postulate 3), the total mass of the system remains constant.</li>
+                    <li><b><strong>Law of Definite Proportions:</strong></b> Any compound is formed by specific atoms combined in a fixed ratio (Postulate 4). For example, water is always 8 parts oxygen to 1 part hydrogen by mass.</li>
+                </ul>
+            </section>
+
+            <!-- Section 3: Classification and Properties of Matter (Summarized) -->
+            <section id="section-classification-matter" class="mb-12">
+                <h2>3. Classification and Properties of Matter</h2>
+
+                <h3>3.1 Classification of Matter</h3>
+                <ul class="list-style-none">
+                    <li><b><strong>Substances:</strong></b> This is a form of matter with fixed composition and properties (Elements and Compounds).
+                        <ul>
+                            <li><b>Element:</b> This is a substance that cannot be separated into simpler substances by chemical means.</li>
+                            <li><b>Compound</b> This is a substance composed of two or more elements chemically united in fixed proportions.</li>
+                        </ul>
+                    </li>
+
+                    <li><b><strong>Mixtures:</strong></b> This is a form of matter with variable composition; components retain their properties.
+                        <ul>
+                            <li><b>Homogeneous:</b> Uniform mixture (e.g., saltwater).</li>
+                            <li><b>Heterogeneous:</b> Non-uniform mixture (e.g., sand and water).</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>3.2 Properties and Changes</h3>
+                <ul class="list-style-none">
+                    <li><b>Physical Property/Change:</b> Can be observed without changing identity (e.g., melting, boiling, density).</li>
+                    <li><b>Chemical Property/Change:</b> Describes how a substance changes into a new substance (e.g., flammability, rusting, burning).</li>
+                    <li><b>Extensive Property:</b> Depends on the amount of matter (e.g., mass, volume).</li>
+                    <li><b>Intensive Property:</b> Independent of the amount of matter (e.g., density, temperature, melting point).</li>
+                </ul>
+            </section>
+
+            <!-- Section 4: The SI System and Measurement (Summarized) -->
+            <section id="section-measurement" class="mb-12">
+                <h2>4. The SI System and Measurement</h2>
+
+                <h3>4.1 Fundamental SI Units (Base Units)</h3>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Physical Quantity</th>
+                                <th>SI Unit</th>
+                                <th>Symbol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Length</td><td>Metre</td><td>m</td></tr>
+                            <tr><td>Mass</td><td>Kilogram</td><td>kg</td></tr>
+                            <tr><td>Time</td><td>Second</td><td>s</td></tr>
+                            <tr><td>Temperature</td><td>Kelvin</td><td>K</td></tr>
+                            <tr><td>Amount of Substance</td><td>Mole</td><td>mol</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>4.2 Derived Units</h3>
+                <ul class="list-style-none">
+                    <li><b>Volume:</b> Derived from length cubed (m³). Common in lab: Litre (L), where 1L = 1dm³ and 1ml = 1cm³.</li>
+                    <li><b>Density:</b> Mass per unit volume mass/volume. Units: g/ml or g/cm³.</li>
+                </ul>
+                <h3>4.3 Conversions</h3>
+                <p>
+                    You arrange the conversion factor(s) so that the unwanted (starting) unit cancels out, leaving only the desired (final) unit.
+                </p>
+                <div class="solution-box">
+                    Starting Quantity × Desired Unit ÷ Starting Unit = Final Quantity
+                </div>
+                
+                
+                <ol class="numbered-list">
+                    <li>Identify the starting unit and the desired final unit.</li>
+                    <li>Find the conversion factors that connect the starting unit to the desired unit.</li>
+                    <li>Set up the calculation so that all units except the desired unit cancel out (starting unit must be in the denominator of the conversion factor).</li>
+                    <li>Perform the multiplication and division.</li>
+                </ol>
+
+                <p class="solution-title" style="font-weight: 700; color: var(--color-gray-900);"></p>
+                <p style="margin-top: 0.25rem;"></p>
+                <div class="solution-box">
+                    <p class="solution-title">Example Problem (Dimensional Analysis)</p>
+                    <p>How many meters are in 3.5 miles? (Use the conversion: 1 mile = 1.609 km and 1 km = 1000 m)</p>
+                    <ul class="step-list">
+                        <li>We need to convert miles to kilometers (km) to meters (m).</li>
+                        <p>3.5miles × 1.609 km ÷ 1 mile × 1000 m ÷ 1 km</p>
+                    </ul>
+                    <p style="margin-top: 0.5rem; color: var(--color-gray-800); font-weight: 700;">
+                        The result is 5631.5 m. (Notice how miles and km units cancel out.)
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 5: naming simple compounds -->
+            <section id="section-naming-simple-compounds" class="mb-12">
+                <h2>5 Naming Simple Compounds</h2>
+                
+                <p>Alright we are going to do this step by step instead, of dumping the rules on you </p>
+
+                <h3>5.1 Ionic Compounds (Metal + Nonmetal)</h3>
+                <p>Most of these are binary compouds ( made of two different elements) </p>
+                <ul>
+                    <li><b>Metal (Cation):</b> naming stays the same.
+                    <li><b>NonMetal (anion):</b> Change ending to "ide".
+                        <p style="margin-top: 0.25rem;">
+                        e.g <b>NaCl</b> <i>Sodium (Na<sup>+</sup>) the metal keeps its name while chlorine (Cl <sup>-</sup>) the Nonemetal changes to chloride adding the <b>"ide"</b> at the end thus becomes <strong>SodiumChloride</strong></i></li>
+                        </p>
+                </ul>
+                <ul>
+                    <li><b>Multiple charges</b> if a compound has multiple charges show with <strong>Roman numerals</strong>.
+                        <p style="margin-top: 0.25rem;">
+                            e.g <b>FeCl<sub>3</sub></b> <i> Iron (Fe<sup>3+</sup>) the metal keeps its name but because of the <sup>3+</sup> it will be (Iron(III)) while chlorine (Cl <sup>-</sup>) the Nonemetal changes to chloride adding the <b>"ide"</b> at the end <strong>iron(III)chloride</strong></i></li>
+                        </p>
+                </ul>
+                <p>some are non-binary ionic compunds (polyatomic compounds)</p>
+                
+            </section>
+
+        </div>
+    </div>
+    
+</body>
+</html>
